@@ -276,6 +276,76 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        
+
+
+        .edit-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            border: 1px solid #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 1000;
+            padding: 20px;
+            width: 400px;
+        }
+
+        .edit-popup .popup-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-popup .popup-content h2 {
+            margin-bottom: 20px;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .popup-content label {
+            margin-bottom: 5px;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .popup-content input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .btn {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .edit-popup .btn.green {
+            background-color: #091F46;
+            color: white;
+        }
+
+        .edit-popup .btn.green:hover {
+            background-color: #7699AE;
+        }
+
+        .edit-popup .btn.red {
+            background-color: #e50914;
+            color: white;
+        }
+
+        .edit-popup .btn.red:hover {
+            background-color: #c82333;
+        }
+
+        
 
         .pagination-controls button:hover {
             background-color: #7699AE;
@@ -450,7 +520,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="create-button"><i class="fas fa-plus"></i> Create</button>
+                <button class="create-button" onclick="openCreatePopup()"><i class="fas fa-plus"></i> Create</button>
                 <div class="table-container">
                     <table id="CategoriesTable">
                         <thead>
@@ -604,6 +674,20 @@
                         <button class="btn red" onclick="closeEditPopup()">Cancel</button>
                     </div>
                 </div>
+                <div class="edit-popup" id="createPopup" style="display: none;">
+                    <div class="popup-content">
+                        <h2>Create Category</h2>
+                        <label for="createID">ID</label>
+                        <input type="text" id="createID">
+                        <label for="createDate">Date</label>
+                        <input type="date" id="createDate">
+                        <label for="createTitle">Title:</label>
+                        <input type="text" id="createTitle">
+                        <button class="btn green" onclick="saveCreate()">Create</button>
+                        <button class="btn red" onclick="closeCreatePopup()">Cancel</button>
+                    </div>
+                </div>
+                
             </div>
         </div>
         <div class="footer">

@@ -98,14 +98,17 @@
         .main {
             display: flex;
             padding: 20px;
-            background-color: #14161a;
+            --tw-bg-opacity: 1;
+            background-color: rgb(8 10 26 / var(--tw-bg-opacity));
             flex: 1;
             gap: 20px;
         }
         .sidebar {
             width: 250px;
-            background-color: #1a1d23;
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
             padding: 20px;
+            border: 1px solid #333;
             border-radius: 15px;
         }
         .sidebar a {
@@ -133,8 +136,10 @@
             width: 80%;
             margin: 20px auto;
             padding: 20px;
-            background-color: #1a1c2b;
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
             border-radius: 10px;
+            border: 1px solid #333;
         }
         .content h2 {
             margin-bottom: 20px;
@@ -244,7 +249,6 @@
             display: flex;
             justify-content: space-around;
             padding: 20px;
-            background-color: #0b0d1a;
         }
         .footer-column {
             display: flex;
@@ -307,6 +311,8 @@
                 <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
                 <a href="{% url 'add' %}" class="active"><i class="fas fa-plus"></i> Add Movie</a>
                 <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
+                <a href="{% url 'language' %}"><i class="fa-solid fa-language"></i>Language</a>
+                <a href="{% url 'review' %}"><i class="fas fa-star"></i>Reviews</a>
                 <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
                 <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
                 <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
@@ -317,60 +323,88 @@
                  Create Movie
                 </h2>
                 <div class="form-row">
-                 <div class="form-group">
-                  <label for="movie-title">
-                   Movie Title
-                  </label>
-                  <input id="movie-title" type="text" value="Game of Thrones"/>
-                 </div>
-                 <div class="form-group" style=" color: #ffffff;">
-                  <label for="movie-duration" style=" color: #ffffff;">
-                   Duration
-                  </label>
-                  <input id="movie-duration" style=" color: #ffffff;" type="text" value="2hr"/>
-                 </div>
+                    <div class="form-group">
+                        <label for="movie-title">
+                        Movie Title
+                        </label>
+                        <input id="movie-title" type="text" placeholder="Movie name"/>
+                    </div>
+                    <div class="form-group" style=" color: #ffffff;">
+                        <label for="movie-duration" style=" color: #ffffff;">
+                        Duration
+                        </label>
+                        <input id="movie-duration" style=" color: #ffffff;" type="text" placeholder="2hr"/>
+                    </div>
                 </div>
                 <div class="form-row">
-                 <div class="form-group">
-                  <label for="language-used">
-                   Language Used
-                  </label>
-                  <input id="language-used" type="text" value="English"/>
-                 </div>
-                 <div class="form-group" style=" color: #ffffff;">
-                  <label for="year-of-release" style=" color: #ffffff;">
-                   Year of Release
-                  </label>
-                  <input id="year-of-release" style=" color: #ffffff;" type="text" value="2022"/>
-                 </div>
+                    <div class="form-group">
+                        <label for="language-used">
+                        Language Used
+                        </label>
+                        <input id="language-used" type="text" placeholder="English"/>
+                    </div>
+                    <div class="form-group" style=" color: #ffffff;">
+                        <label for="year-of-release" style=" color: #ffffff;">
+                        Year of Release
+                        </label>
+                        <input id="year-of-release" style=" color: #ffffff;" type="text" placeholder="2022"/>
+                    </div>
                 </div>
                 <div class="form-row">
-                 <div class="form-group"style=" color: #000000;">
-                  <label for="movie-poster" style=" color: #ffffff;">
-                   Movie Poster
-                  </label>
-                  <div class="file-upload" onclick="document.getElementById('movie-poster').click();">
-                    <i class="fas fa-upload"></i>
-                    <p style=" color: #ffffff;">Upload Poster</p>
-                    <input id="movie-poster" type="file" accept="image/*"/>
+                    <div class="form-group">
+                        <label for="Director-used">
+                        Director
+                        </label>
+                        <input id="Director-used" type="text" placeholder="English"/>
+                    </div>
+                    <div class="form-group" style=" color: #ffffff;">
+                        <label for="Writer" style=" color: #ffffff;">
+                        Writer
+                        </label>
+                        <input id="Writer" style=" color: #ffffff;" type="text" placeholder="2022"/>
+                    </div>
                 </div>
-                 </div>
-                 <div class="form-group" style=" color: #000000;">
-                  <label for="movie-banner" style=" color: #ffffff;">
-                   Movie Banner
-                  </label>
-                  <div class="file-upload" onclick="document.getElementById('movie-banner').click();">
-                    <i class="fas fa-upload"></i>
-                    <p style=" color: #ffffff;">Upload Banner</p>
-                    <input id="movie-banner" type="file" accept="image/*"/>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="Stars">
+                        Stars
+                        </label>
+                        <input id="Stars" type="text" placeholder="English"/>
+                    </div>
+                    <div class="form-group" style=" color: #ffffff;">
+                        <label for="Reviews" style=" color: #ffffff;">
+                        Reviews
+                        </label>
+                        <input id="Reviews" style=" color: #ffffff;" type="text" placeholder="2022"/>
+                    </div>
                 </div>
-                 </div>
+                <div class="form-row">
+                    <div class="form-group"style=" color: #000000;">
+                        <label for="movie-poster" style=" color: #ffffff;">
+                        Movie Poster
+                        </label>
+                        <div class="file-upload" onclick="document.getElementById('movie-poster').click();">
+                            <i class="fas fa-upload"></i>
+                            <p style=" color: #ffffff;">Upload Poster</p>
+                            <input id="movie-poster" type="file" accept="image/*"/>
+                        </div>
+                    </div>
+                    <div class="form-group" style=" color: #000000;">
+                        <label for="movie-banner" style=" color: #ffffff;">
+                        Movie Banner
+                        </label>
+                        <div class="file-upload" onclick="document.getElementById('movie-banner').click();">
+                            <i class="fas fa-upload"></i>
+                            <p style=" color: #ffffff;">Upload Banner</p>
+                            <input id="movie-banner" type="file" accept="image/*"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                  <label for="movie-description">
                   Movie Description
                  </label>
-                 <textarea id="movie-description" rows="4">Movie is short and sweet</textarea>
+                 <textarea id="movie-description" rows="4"placeholder="Movie is short and sweet"></textarea>
                 </div>
                 <div class="form-group">
                  <label for="movie-category">
@@ -394,7 +428,7 @@
                  </label>
                  <div class="cast-list">
                   <div class="cast-item">
-                   <img alt="Cast member 1" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-LziedUrMuChhMfHCAyz3rxhf.png?st=2024-09-12T06%3A03%3A16Z&amp;se=2024-09-12T08%3A03%3A16Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-12T00%3A09%3A58Z&amp;ske=2024-09-13T00%3A09%3A58Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=%2BC9tUwCA9jG8Be0iZYbYULJtYmCQq2zWQOVvqdL/R9s%3D" width="100"/>
+                   <img alt="Cast member 1" height="100" src="{% static 'images/cast/ranbir.jpg' %}" width="100"/>
                    <p>
                     Tom Cruise
                    </p>
@@ -410,7 +444,7 @@
                    </div>
                   </div>
                   <div class="cast-item">
-                   <img alt="Cast member 2" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-yZImqAhk5bfecq3AJCBIi7Pn.png?st=2024-09-12T06%3A03%3A16Z&amp;se=2024-09-12T08%3A03%3A16Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A34%3A35Z&amp;ske=2024-09-12T23%3A34%3A35Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=QNJdhKgBSM/KL0WMMYuOgvt/2MKPAQoZznNxaAdZo5w%3D" width="100"/>
+                   <img alt="Cast member 2" height="100" src="{% static 'images/cast/ranbir.jpg' %}" width="100"/>
                    <p>
                     Brad Pitt
                    </p>
@@ -426,7 +460,7 @@
                    </div>
                   </div>
                   <div class="cast-item">
-                   <img alt="Cast member 3" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-ztnWxtqWVyplsclTYJZngVsz.png?st=2024-09-12T06%3A03%3A16Z&amp;se=2024-09-12T08%3A03%3A16Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A53%3A30Z&amp;ske=2024-09-12T23%3A53%3A30Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=Z3pVrLnuFLTNlgo9s8QFwMwGcJzDQh%2BPpN%2Bdtpi07GU%3D" width="100"/>
+                   <img alt="Cast member 3" height="100" src="{% static 'images/cast/ranbir.jpg' %}" width="100"/>
                    <p>
                     Morgan Freeman
                    </p>
@@ -442,7 +476,7 @@
                    </div>
                   </div>
                   <div class="cast-item">
-                   <img alt="Cast member 4" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-5YzKTPHTvDpgXeJ3JtutBsUr.png?st=2024-09-12T06%3A03%3A13Z&amp;se=2024-09-12T08%3A03%3A13Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A09%3A49Z&amp;ske=2024-09-12T23%3A09%3A49Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=gINiRAAeuSjE5LVk5OjSp/f8rwekZWuqVbESlD2Pg5Y%3D" width="100"/>
+                   <img alt="Cast member 4" height="100" src="{% static 'images/cast/ranbir.jpg' %}" width="100"/>
                    <p>
                     Samuel L. Jackson
                    </p>
@@ -458,7 +492,7 @@
                    </div>
                   </div>
                   <div class="cast-item">
-                   <img alt="Cast member 5" height="100" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-WokViZ75BBGElI9LTO3f9AhV.png?st=2024-09-12T06%3A03%3A16Z&amp;se=2024-09-12T08%3A03%3A16Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A48%3A50Z&amp;ske=2024-09-12T23%3A48%3A50Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=uiuPkw8ItAhPl0j4k29AI9rPgAZqAr8rJLmI2Dn8OO8%3D" width="100"/>
+                   <img alt="Cast member 5" height="100" src="{% static 'images/cast/ranbir.jpg' %}" width="100"/>
                    <p>
                     Scarlett Johansson
                    </p>

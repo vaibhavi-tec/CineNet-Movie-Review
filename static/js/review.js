@@ -9,6 +9,8 @@ function editRow(button) {
     document.getElementById('editName').value = row.cells[0].innerText;
     document.getElementById('editEmail').value = new Date(row.cells[1].innerText).toISOString().substr(0, 10);
     document.getElementById('editDate').value = row.cells[2].innerText;
+    document.getElementById('editrate').value = row.cells[3].innerText;
+    document.getElementById('editmsg').value = row.cells[4].innerText;
     // Show the popup
     document.getElementById('editPopup').style.display = 'block';
 }
@@ -18,6 +20,8 @@ function saveEdit() {
     currentRow.cells[0].innerText = document.getElementById('editName').value;
     currentRow.cells[1].innerText = new Date(document.getElementById('editEmail').value).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
     currentRow.cells[2].innerText = document.getElementById('editDate').value;
+    currentRow.cells[3].innerText = document.getElementById('editrate').value;
+    currentRow.cells[4].innerText = document.getElementById('editmsg').value;
 
     // Close the popup
     closeEditPopup();
@@ -78,8 +82,10 @@ function saveCreate() {
     newRow.insertCell(0).innerText = document.getElementById('createID').value;
     newRow.insertCell(1).innerText = new Date(document.getElementById('createDate').value).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
     newRow.insertCell(2).innerText = document.getElementById('createTitle').value;
+    newRow.insertCell(3).innerText = document.getElementById('createRating').value;
+    newRow.insertCell(4).innerText = document.getElementById('createMessage').value;
     
-    const actionsCell = newRow.insertCell(3);
+    const actionsCell = newRow.insertCell(5);
     actionsCell.innerHTML = `
 
         <div class="actions">
@@ -95,4 +101,18 @@ function closeCreatePopup() {
     document.getElementById('createPopup').style.display = 'none';
 }
 
+let currentStarRating = 0;
+    
+function updateStars() {
+    const rating = document.getElementById('rating').value;
+    const stars = document.querySelectorAll('#stars .fa-star');
+    stars.forEach((star, index) => {
+        star.style.color = index < rating ? '#f5c518' : '#b0b3b8';
+    });
+    currentStarRating = rating;
+}
 
+function setRating(value) {
+    document.getElementById('rating').value = value;
+    updateStars();
+}            

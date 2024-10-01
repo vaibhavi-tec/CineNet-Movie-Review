@@ -29,6 +29,12 @@ def dashboard(request):
 def categories(request):
     return render(request,"admin/categories.html",context=None)
 
+def language(request):
+    return render(request,"admin/language.html",context=None)
+
+def review(request):
+    return render(request,"admin/review.html",context=None)
+
 def add(request):
     return render(request,"admin/add.html",context=None)
 
