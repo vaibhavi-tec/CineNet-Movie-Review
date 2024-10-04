@@ -495,8 +495,8 @@
                 <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
                 <a href="{% url 'add' %}"><i class="fas fa-plus"></i> Add Movie</a>
-                <a href="{% url 'categories' %}"  class="active"><i class="fas fa-list"></i> Categories</a>
-                <a href="{% url 'language' %}"><i class="fa-solid fa-language"></i>Language</a>
+                <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
+                <a href="{% url 'language' %}" class="active"><i class="fa-solid fa-language"></i>Language</a>
                 <a href="{% url 'review' %}"><i class="fas fa-star"></i>Reviews</a>
                 <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
                 <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
@@ -512,7 +512,6 @@
                         <button><i class="fas fa-search"></i></button>
                     </div>
                     <div class="actions">
-                        <button class="btn green" id="newAppointmentBtn"><a href="#" style="color: white;"> Book Appointment</a></button>
                         <button class="btn green" id="filterBtn">Filter</button>
                         <div class="filter-options" id="filterOptions" style="display: none;">
                             <button onclick="sortTable('name', 'asc')">Sort A-Z</button>
@@ -530,7 +529,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>DATE</th>
-                                <th>TITLE</th>
+                                <th>LANGUAGE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
@@ -538,7 +537,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Romantic</td>
+                                <td>Kannada</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -547,7 +546,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Action</td>
+                                <td>English</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -556,7 +555,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Horror</td>
+                                <td>Telgu</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -565,7 +564,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Comedy</td>
+                                <td>Korean</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -574,7 +573,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Adventure</td>
+                                <td>Germen</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -583,7 +582,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Sports</td>
+                                <td>Hindi</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -592,70 +591,7 @@
                             <tr>
                                 <td>2975TB</td>
                                 <td>12, Jan 2023</td>
-                                <td>Fantasy</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Musicals</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Drama</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Thriller</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Western</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Historical</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Science</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Mystery</td>
+                                <td>Tamil</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
@@ -671,7 +607,7 @@
                         <input type="text" id="editName">
                         <label for="editEmail">Date</label>
                         <input type="date" id="editEmail">
-                        <label for="editDate">Title:</label>
+                        <label for="editDate">Language:</label>
                         <input type="text" id="editDate">
                         <button class="btn green" onclick="saveEdit()">Save</button>
                         <button class="btn red" onclick="closeEditPopup()">Cancel</button>
@@ -684,7 +620,7 @@
                         <input type="text" id="createID">
                         <label for="createDate">Date</label>
                         <input type="date" id="createDate">
-                        <label for="createTitle">Title:</label>
+                        <label for="createTitle">Language:</label>
                         <input type="text" id="createTitle">
                         <button class="btn green" onclick="saveCreate()">Create</button>
                         <button class="btn red" onclick="closeCreatePopup()">Cancel</button>
@@ -724,6 +660,6 @@
             </div>
         </div>
     </div>
-    <script src="{% static '/js/categories.js' %}"></script>
+    <script src="{% static '/js/lannguage.js' %}"></script>
 </body>
 </html>

@@ -1,5 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import HttpResponse
+from rest_framework.views import APIView
+from django.http import JsonResponse
+from .models import User
+
 
 
 def indexmain(request):
@@ -9,7 +13,7 @@ def movies(request):
     return render(request,"admin/movies.html",context=None)
 
 def mainmovie(request):
-    return render(request,"admin/main movie.html",context=None)
+    return render(request,"admin/mainmovie.html",context=None)
 
 def about(request):
     return render(request,"admin/about.html",context=None)
@@ -48,11 +52,43 @@ def password(request):
     return render(request,"admin/password.html",context=None)
 
 def updateprofile(request):
-    return render(request,"admin/update profile.html",context=None)
+    return render(request,"admin/updateprofile.html",context=None)
 
 def userview(request):
-    return render(request,"admin/userview.html",context=None)
+    users = User.objects.all()
+    return render(request,"admin/userview.html", {'users': users})
 
 def videoplay(request):
-    return render(request,"admin/video play.html",context=None)
+    return render(request,"admin/videoplay.html",context=None)
 # Create your views here.
+
+
+#...............................................................................................
+class login_view(APIView):
+    def post(self,request):
+        patientname=request.data.get('patientname')
+        password=request.data.get('pateintpass')
+        pt = User.objects.filter(username=patientname,password=password).values()
+        print("********pt: ", pt)
+        if len(pt) > 0:
+            request.session["userdata"]= pt[0]["username"]
+            return JsonResponse({"status":"pass", "user": pt[0]["username"], "role": pt[0]["role"]})
+        else:
+            return JsonResponse({"status": "fail"})
+        
+#....................................................................................................
+
+class AddUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        # Create a new appointment without the appointment_id
+        user = User(
+            email=data.get('email'),
+            username=data.get('username'),
+            # appointment_id is not set here, Django will auto-generate it
+            password=data.get('password'),
+            role=data.get('role')
+        )
+        user.save()
+        # Return a success message
+        return JsonResponse({"message": "Signed Up successfully!"})

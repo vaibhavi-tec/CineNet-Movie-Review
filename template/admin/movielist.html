@@ -223,7 +223,7 @@
             border: 1px solid #333;
         }
         table {
-            width: 130%;
+            width: 180%;
             border-collapse: collapse;
             border: 1px solid #333;
         }
@@ -409,6 +409,11 @@
             font-size: 14px;
             margin-bottom: 8px;
         }
+
+        .popup-content {
+            max-height: 500px; /* Adjust height as needed */
+            overflow-y: auto; /* Enable horizontal scrolling */
+        }
     </style>
 </head>
 <body>
@@ -484,6 +489,8 @@
                                     <th>Reviews</th>
                                     <th>Year</th>
                                     <th>Hours</th>
+                                    <th>Cast</th>
+                                    <th>Movie link</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -525,7 +532,11 @@
                                 <td>
                                 3hr
                                 </td>
-
+                                <td>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                </td>
+                                <td>https://www.youtube.com/embed/L0MK7qz13bU</td>
                                 <td class="actions">
                                     <button  class="edit" onclick="editRow(this)">
                                     Edit</button>
@@ -570,6 +581,11 @@
                                 <td>
                                 4hr
                                 </td>
+                                <td>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                </td>
+                                <td>https://www.youtube.com/embed/L0MK7qz13bU</td>
                                 <td class="actions">
                                     <button  class="edit" onclick="editRow(this)">
                                     Edit</button>
@@ -614,6 +630,11 @@
                                 <td>
                                 1hr
                                 </td>
+                                <td>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                </td>
+                                <td>https://www.youtube.com/embed/L0MK7qz13bU</td>
                                 <td class="actions">
                                     <button  class="edit" onclick="editRow(this)">
                                     Edit</button>
@@ -658,143 +679,17 @@
                                 <td>
                                 3hr
                                 </td>
+                                <td>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                    <img alt="Movie poster for Army Of The Dead" height="50" src="{% static 'images/cast/ranbir.jpg' %}" width="50"/>
+                                </td>
+                                <td>https://www.youtube.com/embed/L0MK7qz13bU</td>
                                 <td class="actions">
                                     <button  class="edit" onclick="editRow(this)">
                                     Edit</button>
                                     <button class="delete" onclick="deleteRow(this)"style="background-color: #e50914;">✖</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                <img alt="Movie poster for Below her mouth" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-7nfSzFGQ4Pb6pl7DlnUqeyuq.png?st=2024-09-16T04%3A14%3A48Z&amp;se=2024-09-16T06%3A14%3A48Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-16T00%3A00%3A21Z&amp;ske=2024-09-17T00%3A00%3A21Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=T1nBX0jt9Itc7KSjbi6MJgoto6kopkdLL6jwnEfTMds%3D" width="50"/>
-                                </td>
-                                <td>
-                                Below her mouth
-                                </td>
-                                <td>
-                                    Army Of The Dead
-                                </td>
-                                <td>
-                                Romantic
-                                </td>
-                                <td>
-                                English
-                                </td>
-                                <td>Amar Kaushik</td>
-                                <td>Niren Bhatt</td>
-                                <td>Rajkummar Rao,Shraddha Kapoor,Pankaj Tripathi</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>
-                                1989
-                                </td>
-                                <td>
-                                1hr
-                                </td>
-                                <td class="actions">
-                                    <button  class="edit" onclick="editRow(this)">
-                                    Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"style="background-color: #e50914;">✖</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <img alt="Movie poster for Legend of the seeker" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-3pPkweUfEduBSihUB03Dwfw1.png?st=2024-09-16T04%3A14%3A39Z&amp;se=2024-09-16T06%3A14%3A39Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A09%3A08Z&amp;ske=2024-09-16T23%3A09%3A08Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=2x7dv4E6Ce70iMBcbASVir8r7s%2BRQss4ZUXT3UkPiWU%3D" width="50"/>
-                                </td>
-                                <td>
-                                Legend of the seeker
-                                </td>
-                                <td>
-                                    Army Of The Dead
-                                </td>
-                                <td>
-                                Horror
-                                </td>
-                                
-                                <td>
-                                Swahili
-                                </td>
-                                <td>Amar Kaushik</td>
-                                <td>Niren Bhatt</td>
-                                <td>Rajkummar Rao,Shraddha Kapoor,Pankaj Tripathi</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>
-                                2012
-                                </td>
-                                <td>
-                                19hr
-                                </td>
-                                <td class="actions">
-                                    <button  class="edit" onclick="editRow(this)">
-                                    Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"style="background-color: #e50914;">✖</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <img alt="Movie poster for Scarlet Heart" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-4QrxEZqGq24a0A8O6BVKj0v3.png?st=2024-09-16T04%3A14%3A42Z&amp;se=2024-09-16T06%3A14%3A42Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A18%3A57Z&amp;ske=2024-09-16T23%3A18%3A57Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=iMDMKLz91fmckLvVRNOBqa87nWeAzueEphKcIFRY278%3D" width="50"/>
-                                </td>
-                                <td>
-                                Scarlet Heart
-                                </td>
-                                <td>
-                                Army Of The Dead
-                                </td>
-                                <td>
-                                Fantasy
-                                </td>
-                                <td>
-                                Korean
-                                </td>
-                                <td>Amar Kaushik</td>
-                                <td>Niren Bhatt</td>
-                                <td>Rajkummar Rao,Shraddha Kapoor,Pankaj Tripathi</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>
-                                2005
-                                </td>
-                                <td>
-                                4hr
-                                </td>
-                                <td class="actions">
-                                <button  class="edit" onclick="editRow(this)">
-                                Edit</button>
-                                <button class="delete" onclick="deleteRow(this)"style="background-color: #e50914;">✖</button>
-                                </td>
-                            </tr>
-                            
                             </tbody>
                         </table>
                     </div>
@@ -811,16 +706,39 @@
                         <h2>Edit Movie</h2>
                         <label for="editImage">Image</label>
                         <input type="text" id="editImage" placeholder="../images/">
-                        <label for="editName">Image</label>
+                        <label for="editName">Name</label>
                         <input type="text" id="editName">
-                        <label for="editEmail">Name</label>
+                        <label for="editEmail">Description</label>
                         <input type="text" id="editEmail">
                         <label for="editDate">Category:</label>
                         <input type="text" id="editDate">
-                        <label for="editFrom">Year:</label>
-                        <input type="year" id="editFrom">
-                        <label for="editTo">Hours:</label>
+                        <label for="editFrom">Language:</label>
+                        <input type="text" id="editFrom">
+                        <label for="editTo">Director:</label>
                         <input type="text" id="editTo">
+                        <label for="Writer">Writer:</label>
+                        <input type="text" id="Writer">
+                        <label for="Reviews">Cast:</label>
+                        <input type="text" id="Reviews">
+                        <label for="Stars">Stars:</label>
+                        <select id="rating" onchange="updateStars()">
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                        <div class="review-rating" id="starsDisplay">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <label for="Year">Year:</label>
+                        <input type="year" id="Year">
+                        <label for="Hours">Hours:</label>
+                        <input type="text" id="Hours">
                         <button class="btn green" onclick="saveEdit()">Save</button>
                         <button class="btn red" onclick="closeEditPopup()">Cancel</button>
                     </div>

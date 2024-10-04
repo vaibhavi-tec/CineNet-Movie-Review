@@ -22,4 +22,9 @@ urlpatterns = [
     path('userview', views.userview, name='userview'),
     path('videoplay', views.videoplay, name='videoplay'),
 
+
+    path('login_check/', views.login_view.as_view(), name='login_check'),
+
+    path('api/add_user/', views.AddUserView.as_view(), name='add_user'),
+
 ]

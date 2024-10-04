@@ -2,8 +2,9 @@ let currentRow;
 
 function editRow(button) {
     // Get the row to edit
-    const row = button.parentNode.parentNode;
+    const row = button.closest('tr'); // Use closest to ensure it gets the row
     currentRow = row;
+    
 
     // Populate the edit form with the row data
     document.getElementById('editName').value = row.cells[0].innerText;
