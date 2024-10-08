@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from rest_framework.views import APIView
 from django.http import JsonResponse
-from .models import User
-
+from rest_framework.views import APIView
+from .models import User, Category
+from django.views.generic.base import TemplateView
 
 
 def indexmain(request):
@@ -31,7 +31,8 @@ def dashboard(request):
     return render(request,"admin/dashboard.html",context=None)
 
 def categories(request):
-    return render(request,"admin/categories.html",context=None)
+    category = Category.objects.all()
+    return render(request,"admin/categories.html",{'users': category})
 
 def language(request):
     return render(request,"admin/language.html",context=None)
@@ -81,14 +82,57 @@ class login_view(APIView):
 class AddUserView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
-        # Create a new appointment without the appointment_id
+        print("Received data:", data)  # Log incoming data
+
+        # Additional checks for unique constraints can be added here
+
         user = User(
             email=data.get('email'),
             username=data.get('username'),
-            # appointment_id is not set here, Django will auto-generate it
             password=data.get('password'),
-            role=data.get('role')
+            role=data.get('role'),
+            image=data.get('profile')  # Handle profile image
         )
         user.save()
-        # Return a success message
+        
         return JsonResponse({"message": "Signed Up successfully!"})
+    
+class delete_user(APIView):
+    def post(self,request):
+        username = request.POST['username']
+        User.objects.filter(username=username).delete()
+        return JsonResponse({"status":"pass"})
+
+#............................................................................................................
+
+class AddCategoriesView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        print("Received data:", data)  # Log incoming data
+
+        # Additional checks for unique constraints can be added here
+
+        category = Category(
+            title=data.get('title'),
+        )
+        category.save()
+        
+        return JsonResponse({"message": "Categories added successfully!"})
+
+class UserDoctorView(TemplateView):
+    model = User
+    template_name = "categories.html" 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        title = self.request.session.get("category")
+        category = Category.objects.get(title=title)
+        context['currentuser'] = category.title
+        return context
+    
+class delete_categories(APIView):
+    def post(self,request):
+        cid = request.POST['cid']
+        Category.objects.filter(cid=cid).delete()
+        return JsonResponse({"status":"pass"})
+        

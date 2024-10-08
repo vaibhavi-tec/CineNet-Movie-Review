@@ -3,6 +3,7 @@
 <head>
     <title>NETFlixo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -98,11 +99,12 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            text-align: center;
+            text-align: left;
         }
         .login-box h2 {
             color: #ff0000;
             margin-bottom: 20px;
+            text-align: center;
         }
         .login-box input {
             width: 100%;
@@ -182,25 +184,25 @@
             <input type="text" placeholder="Search Movie Name from here">
         </div>
         <div class="nav-links">
-            <a href="{% url 'movies' %}">Movies</a>
-            <a href="{% url 'about' %}">About Us</a>
-            <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            <a href="{% url 'signin' %}">Movies</a>
+            <a href="{% url 'signin' %}">About Us</a>
+            <a href="{% url 'signin' %}" class="contact">Contact Us</a>
         </div>
         <div class="nav-icons">
             <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-            <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+            <a href="{% url 'signin' %}"><i class="fas fa-heart">
                 <span class="notification">3</span>
             </i></a>
         </div>
     </div>
     <div class="login-container">
-        <div class="login-box">
+        <div class="login-box" id="loginform">
             <h2>NETFlixo</h2>
-            <label class="text-border font-semibold">Email</label>
-            <input type="email" placeholder="Email" value="cinemanet@gmail.com">
-            <label class="text-border font-semibold">Password</label>
-            <input type="password" placeholder="Password" value="******">
-            <button><i class="fas fa-sign-in-alt"></i> Sign In</button>
+            <label class="username">Username</label>
+            <input type="text" placeholder="Username" id="username">
+            <label class="password">Password</label>
+            <input type="password" placeholder="Password" id="password">
+            <button  onclick="check();"><i class="fas fa-sign-in-alt"></i> Sign In</button>
             <div class="signup-link">
                 Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
             </div>
@@ -236,5 +238,43 @@
             <p>Email: info@zpunet.com</p>
         </div>
     </div>
+    <script>
+        function check()
+        {
+            var username = $("#username").val();
+            var pass = $("#password").val();
+            //console.log("username: ", username);
+            //console.log("password: ", pass);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'login_check' %}",
+                data:{"patientname": username, "pateintpass": pass},
+                success: function(data)
+                {
+                    console.log(data);
+                     if(data["status"] == "pass")
+                    {
+                        console.log("user: ", data["user"]);
+                        console.log("role: ", data["role"]);
+                        if(data["role"] == 'Admin')
+                        {
+                            alert("loged into admindash");
+                            window.location.replace("/adminsite/indexmain")
+                        }
+                        else if(data["role"] == 'User')
+                        {
+                            alert("loged into staffdash");
+                            window.location.replace("/User/indexmain")
+                        }
+                        else
+                        {
+                            alert("login failed");
+                        }
+                        
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

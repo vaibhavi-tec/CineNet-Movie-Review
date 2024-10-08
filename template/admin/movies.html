@@ -249,15 +249,17 @@
             <input type="text" placeholder="Search Movie Name from here">
         </div>
         <div class="nav-links">
-            <a href="{% url 'movies' %}">Movies</a>
-            <a href="{% url 'about' %}">About Us</a>
-            <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            <a href="/adminsite/movies">Movies</a>
+            <a href="/adminsite/about">About Us</a>
+            <a href="/adminsite/contact" class="contact">Contact Us</a>
         </div>
         <div class="nav-icons">
             <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-            <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                <span class="notification">3</span>
-            </i></a>
+            <a href="/adminsite/dashboard">
+                <i class="fas fa-heart">
+                    <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                </i>
+            </a>
         </div>
     </div>
     <div class="filter">
@@ -300,8 +302,8 @@
     </h2>
     <div class="movies">
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/ZNMD.jpg' %}" width="300"/>
+            <h3>Zindagi Na Milegi Dubara</h3>
             <div class="review-rating">
                     <i class="fas fa-star"></i>
                     <i class="fas fa-star"></i>
@@ -312,8 +314,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="250"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/googly.jpg' %}" width="250"/>
+            <h3>Googly</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -329,8 +331,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/hello.jpg' %}" width="300"/>
+            <h3>Hello</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -346,8 +348,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/helloguru.jpg' %}" width="300"/>
+            <h3>Helloguru</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -363,8 +365,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/khoobsurat.jpg' %}" width="300"/>
+            <h3>Khoobsurat</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -380,8 +382,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/kirikparty.jpg' %}" width="300"/>
+            <h3>Kirik Party</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -397,8 +399,8 @@
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
         <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/milana.jpg' %}" width="300"/>
+            <h3>Milana</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -413,9 +415,10 @@
             </div>
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
         </div>
-        <div class="movie">
-            <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
-            <h3>The Conjuring</h3>
+        <div class="movie" >
+            <a href="{% url 'mainmovie' %}">
+            <img alt="Related movie poster" height="350" src="{% static 'images/movies/Nenu Sailaja.jpg' %}" width="300"/>
+            <h3>Nenu Sailaja</h3>
             <div class="review-rating">
                     <i class="fas fa-star">
                     </i>
@@ -429,6 +432,7 @@
                     </i>
             </div>
             <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
+            </a>
         </div>
     </div>
         <div class="load-more">
@@ -466,9 +470,23 @@
         </div>
     </div>
     <script>
+        let wishlistCount = 0; // Initialize the count
+
         function toggleWishlist(icon) {
-                icon.style.color = icon.style.color === 'red' ? '#ffffff' : 'red';
+            // Toggle the heart color
+            icon.style.color = icon.style.color === 'red' ? '#ffffff' : 'red';
+
+            // Update the wishlist count based on the heart color
+            if (icon.style.color === 'red') {
+                wishlistCount += 1; // Increase count when added to wishlist
+            } else {
+                wishlistCount -= 1; // Decrease count when removed from wishlist
             }
+
+            // Update the count display
+            document.getElementById('wishlistCount').innerText = wishlistCount;
+        }
+
     </script>
  </body>
 </html>

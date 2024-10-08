@@ -483,29 +483,31 @@
                 <input type="text" placeholder="Search Movie Name from here">
             </div>
             <div class="nav-links">
-                <a href="{% url 'movies' %}">Movies</a>
-                <a href="{% url 'about' %}">About Us</a>
-                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+                <a href="/adminsite/movies">Movies</a>
+                <a href="/adminsite/about">About Us</a>
+                <a href="/adminsite/contact" class="contact">Contact Us</a>
             </div>
             <div class="nav-icons">
                 <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                    <span class="notification">3</span>
-                </i></a>
+                <a href="/adminsite/dashboard">
+                    <i class="fas fa-heart">
+                        <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                    </i>
+                </a>
             </div>
         </div>
         <div class="main">
             <div class="sidebar">
-                <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/adminsite/dashboard"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
                 <a href="{% url 'add' %}"><i class="fas fa-plus"></i> Add Movie</a>
                 <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
                 <a href="{% url 'language' %}"><i class="fa-solid fa-language"></i>Language</a>
-                <a href="{% url 'review' %}"  class="active"><i class="fas fa-star"></i>Reviews</a>
+                <a href="{% url 'review' %}"   class="active"><i class="fas fa-star"></i>Reviews</a>
                 <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
-                <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
-                <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
-                <a href="{% url 'password' %}" ><i class="fas fa-key"></i> Change Password</a>
+                <a href="/adminsite/updateprofile"><i class="fas fa-user-edit"></i> Update Profile</a>
+                <a href="/adminsite/fav"><i class="fas fa-heart"></i> Favorites Movies</a>
+                <a href="/adminsite/password" ><i class="fas fa-key"></i> Change Password</a>
                 
             </div>
             <div class="content">
@@ -606,114 +608,40 @@
                                     <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Korean</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>really good Movie</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Germen</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>really good Movie</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Hindi</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>really good Movie</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Tamil</td>
-                                <td><div class="review-rating">
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="fas fa-star">
-                                    </i>
-                                    <i class="far fa-star">
-                                    </i>
-                                </div></td>
-                                <td>really good Movie</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="edit-popup" id="editPopup">
                     <div class="popup-content">
                         <h2>Edit Categories</h2>
-                        <label for="editName">ID</label>
-                        <input type="text" id="editName">
-                        <label for="editEmail">Date</label>
-                        <input type="date" id="editEmail">
-                        <label for="editDate">Movie Name:</label>
-                        <input type="text" id="editDate">
-                        <label for="editrate">Rating:</label>
-                        <input type="text" id="editrate">
-                        <label for="editmsg">Message:</label>
-                        <input type="text" id="editmsg">
+                        <label for="editID">ID</label>
+                        <input type="text" id="editID">
+                        <label for="editDate">Date</label>
+                        <input type="date" id="editDate">
+                        <label for="editMovie">Movie Name:</label>
+                        <input type="text" id="editMovie">
+                        <label for="editRating">Rating:</label>
+                        <select id="editRating" onchange="updateStars('editRating', 'editStars')">
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                        </select>
+                        <div class="stars" id="editStars">
+                            <i class="far fa-star" data-value="1" onclick="setRating('editStars', 1)"></i>
+                            <i class="far fa-star" data-value="2" onclick="setRating('editStars', 2)"></i>
+                            <i class="far fa-star" data-value="3" onclick="setRating('editStars', 3)"></i>
+                            <i class="far fa-star" data-value="4" onclick="setRating('editStars', 4)"></i>
+                            <i class="far fa-star" data-value="5" onclick="setRating('editStars', 5)"></i>
+                        </div>
+                        <label for="editMessage">Message:</label>
+                        <input type="text" id="editMessage">
                         <button class="btn green" onclick="saveEdit()">Save</button>
                         <button class="btn red" onclick="closeEditPopup()">Cancel</button>
                     </div>
                 </div>
+                
                 <div class="edit-popup" id="createPopup" style="display: none;">
                     <div class="popup-content">
                         <h2>Create Category</h2>
@@ -721,22 +649,22 @@
                         <input type="text" id="createID">
                         <label for="createDate">Date</label>
                         <input type="date" id="createDate">
-                        <label for="createTitle">Language:</label>
-                        <input type="text" id="createTitle">
-                        <label for="createRating">Select Rating</label>
-                        <select id="createRating" onchange="updateStars()">
+                        <label for="createMovie">Movie:</label> <!-- Correct label -->
+                        <input type="text" id="createMovie"> <!-- Ensure this ID matches -->
+                        <label for="createRating">Select Rating:</label>
+                        <select id="createRating" onchange="updateStars('createRating', 'createStars')">
                             <option value="1">1 - Poor</option>
                             <option value="2">2 - Fair</option>
                             <option value="3">3 - Good</option>
                             <option value="4">4 - Very Good</option>
                             <option value="5">5 - Excellent</option>
                         </select>
-                        <div class="stars" id="stars">
-                            <i class="fas fa-star" data-value="2" onclick="setRating(2)"></i>
-                            <i class="fas fa-star" data-value="3" onclick="setRating(3)"></i>
-                            <i class="fas fa-star" data-value="4" onclick="setRating(4)"></i>
-                            <i class="fas fa-star" data-value="5" onclick="setRating(5)"></i>
-                            <i class="fas fa-star" data-value="6" onclick="setRating(6)"></i>
+                        <div class="stars" id="createStars">
+                            <i class="far fa-star" data-value="1" onclick="setRating(1, 'create')"></i>
+                            <i class="far fa-star" data-value="2" onclick="setRating(2, 'create')"></i>
+                            <i class="far fa-star" data-value="3" onclick="setRating(3, 'create')"></i>
+                            <i class="far fa-star" data-value="4" onclick="setRating(4, 'create')"></i>
+                            <i class="far fa-star" data-value="5" onclick="setRating(5, 'create')"></i>
                         </div>
                         <label for="createMessage">Message:</label>
                         <input type="text" id="createMessage">
@@ -744,6 +672,8 @@
                         <button class="btn red" onclick="closeCreatePopup()">Cancel</button>
                     </div>
                 </div>
+                
+                
                 
             </div>
         </div>

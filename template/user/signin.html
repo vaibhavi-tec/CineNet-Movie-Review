@@ -3,6 +3,7 @@
 <head>
     <title>NETFlixo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             margin: 0;
@@ -76,7 +77,13 @@
         .navbar .nav-icons .fa-heart:hover{
             color: #e50914;
         }
-
+        .nav-icons .user-icon {
+            width: 40px; /* Set the width */
+            height: 40px; /* Set the height */
+            border-radius: 50%; /* Make it circular */
+            object-fit: cover; /* Ensure the image covers the circle */
+            margin: 0 10px; /* Space between icons */
+        }
         .navbar .nav-icons .fa-heart .notification {
             position: absolute;
             top: -5px;
@@ -183,13 +190,15 @@
             <input type="text" placeholder="Search Movie Name from here">
         </div>
         <div class="nav-links">
-            <a href="{% url 'movies' %}">Movies</a>
-            <a href="{% url 'about' %}">About Us</a>
-            <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            <a href="{% url 'signin' %}">Movies</a>
+            <a href="{% url 'signin' %}">About Us</a>
+            <a href="{% url 'signin' %}" class="contact">Contact Us</a>
         </div>
         <div class="nav-icons">
-            <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-            <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+            <a href="{% url 'signin' %}">
+                <img src="{% static 'images/cast/ranbir.jpg' %}" alt="User" class="user-icon" />
+            </a>
+            <a href="{% url 'signin' %}"><i class="fas fa-heart">
                 <span class="notification">3</span>
             </i></a>
         </div>
@@ -262,8 +271,8 @@
                         }
                         else if(data["role"] == 'User')
                         {
-                            alert("loged into staffdash");
-                            window.location.replace("/User/User")
+                            alert("loged into User");
+                            window.location.replace("/User/indexmain")
                         }
                         else
                         {

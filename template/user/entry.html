@@ -11,7 +11,7 @@
     <header class="showcase">
         <div class="showcase-top">
             <img src="{% static 'images/signup/logo.png' %}" alt="Netflix Logo">
-            <a href="{% url 'signup'%}" class="btn btn-rounded">Sign In</a>
+            <a href="{% url 'signin' %}" class="btn btn-rounded">Sign In</a>
         </div>
         <div class="showcase-content">
             <h1>Unlimited movies, TV shows and more.</h1>
@@ -75,33 +75,35 @@
     </section>
 
 
-    <footer class="footer">
-        <p>Questions? Call 000-800-040-1843</p>
-        <div class="footer-cols">
-            <ul>
-                <li><a href="#">FAQ</a></li>
-                <li><a href="#">Investor Relations</a></li>
-                <li><a href="#">Privacy</a></li>
-                <li><a href="#">Speed Test</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Help Centre</a></li>
-                <li><a href="#">Jobs</a></li>
-                <li><a href="#">Cookie Preferences</a></li>
-                <li><a href="#">Watch for Free</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Account</a></li>
-                <li><a href="#">Ways to Watch</a></li>
-                <li><a href="#">Corporate Information</a></li>
-                <li><a href="#">Legal Notices</a></li>
-            </ul>
-            <ul>
-                <li><a href="#">Media Centre</a></li>
-                <li><a href="#">Terms of Use</a></li>
-                <li><a href="#">Contact Us</a></li>
-            </ul>
+    <div class="footer">
+        <div class="footer-column">
+            <h3>Company</h3>
+            <a href="{% url 'indexmain' %}">Home</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+            <a href="{% url 'movies' %}">Movies</a>
         </div>
-    </footer>
+        <div class="footer-column">
+            <h3>Top Categories</h3>
+            <a href="#">Action</a>
+            <a href="#">Romantic</a>
+            <a href="#">Drama</a>
+            <a href="#">Historical</a>
+        </div>
+        <div class="footer-column">
+            <h3>My Account</h3>
+            <a href="#">Dashboard</a>
+            <a href="#">My Favorites</a>
+            <a href="#">Profile</a>
+            <a href="#">Change Password</a>
+        </div>
+        <div class="footer-contact">
+            <h3>CinemaNet</h3>
+            <p>Lorem 196 Andrew Road, Suite 200,</p>
+            <p>New York, NY 10007</p>
+            <p>Tell: +255 754 661 423</p>
+            <p>Email: info@zpunet.com</p>
+        </div>
+    </div>
 </body>
 </html>

@@ -348,15 +348,17 @@
                 <input type="text" placeholder="Search Movie Name from here">
             </div>
             <div class="nav-links">
-                <a href="{% url 'movies' %}">Movies</a>
-                <a href="{% url 'about' %}">About Us</a>
-                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+                <a href="/adminsite/movies">Movies</a>
+                <a href="/adminsite/about">About Us</a>
+                <a href="/adminsite/contact" class="contact">Contact Us</a>
             </div>
             <div class="nav-icons">
                 <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                    <span class="notification">3</span>
-                </i></a>
+                <a href="/adminsite/dashboard">
+                    <i class="fas fa-heart">
+                        <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                    </i>
+                </a>
             </div>
         </div>
         <div class="container main-content">

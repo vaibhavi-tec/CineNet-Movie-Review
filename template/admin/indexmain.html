@@ -144,15 +144,17 @@
             <input type="text" placeholder="Search Movie Name from here">
         </div>
         <div class="nav-links">
-            <a href="{% url 'movies' %}">Movies</a>
-            <a href="{% url 'about' %}">About Us</a>
-            <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            <a href="/adminsite/movies">Movies</a>
+            <a href="/adminsite/about">About Us</a>
+            <a href="/adminsite/contact" class="contact">Contact Us</a>
         </div>
         <div class="nav-icons">
             <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-            <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                <span class="notification">3</span>
-            </i></a>
+            <a href="/adminsite/dashboard">
+                <i class="fas fa-heart">
+                    <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                </i>
+            </a>
         </div>
     </div>
   <!-- Main Content -->
@@ -206,9 +208,28 @@
             </h3>
             <div class="grid grid-cols-4 gap-4">
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300" style="border: 1px solid #333;"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/frozen.png' %}" width="300" style="border: 1px solid #333;"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Frozen</h2>
+                        <div class="review-rating" >
+                            <i class="fas fa-star">
+                            </i>
+                            <i class="fas fa-star">
+                            </i>
+                            <i class="fas fa-star">
+                            </i>
+                            <i class="fas fa-star">
+                            </i>
+                            <i class="far fa-star">
+                            </i>
+                        </div>
+                        <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
+                    </div>
+                </div>
+                <div class="relative" id="related-movie">
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/YJYD.jpg' %}" width="300"/>
+                    <div class="relative-items"  style="margin-top: 10px;">
+                        <h2 style="font-size: 25px; text-align:center;">Yeh Jawanee Yeh Dewanee</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -225,9 +246,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/ZNMD.jpg' %}" width="300"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Zindagi Na Milegi Dubara</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -244,9 +265,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/wakeupsid.jpg' %}" width="300"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Wake Up Sid</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -263,9 +284,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/googly.jpg' %}" width="300"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Googly</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -282,9 +303,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/druva.jpg' %}" width="300"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Dhruva</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -301,9 +322,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/fidaa.jpg' %}" width="300"/>
                     <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Fidaa</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -320,28 +341,9 @@
                     </div>
                 </div>
                 <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
-                    <div class="relative-items"  style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
-                        <div class="review-rating">
-                            <i class="fas fa-star">
-                            </i>
-                            <i class="fas fa-star">
-                            </i>
-                            <i class="fas fa-star">
-                            </i>
-                            <i class="fas fa-star">
-                            </i>
-                            <i class="far fa-star">
-                            </i>
-                        </div>
-                        <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
-                    </div>
-                </div>
-                <div class="relative" id="related-movie">
-                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                    <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/hello.jpg' %}" width="300"/>
                     <div class="relative-items" style="margin-top: 10px;">
-                        <h2>The Conjuring</h2>
+                        <h2 style="font-size: 25px; text-align:center;">Hello</h2>
                         <div class="review-rating">
                             <i class="fas fa-star">
                             </i>
@@ -396,9 +398,9 @@
                 <div id="topRatedMovies" class="grid grid-cols-4 gap-4 overflow-hidden">
                     <!-- Movie items go here -->
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/Ramachari.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Ramachari</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -415,9 +417,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/rajakumara.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Rajakumara</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -434,9 +436,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/googly.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Googly</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -453,9 +455,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/parmathma.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Parmathma</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -472,9 +474,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/kirikparty.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Kirik Party</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -491,9 +493,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/hello.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">Hello</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -510,9 +512,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/ZNMD.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">ZNMD</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -529,9 +531,9 @@
                         </div>
                     </div>
                     <div class="relative" id="related-movie">
-                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/banner.png' %}" width="300"/>
+                        <img alt="Fast and Furious movie poster" class="w-full h-64 object-cover rounded-lg" height="600" src="{% static 'images/movies/YJYD.jpg' %}" width="300"/>
                         <div class="relative-items" style="margin-top: 10px;">
-                            <h2>The Conjuring</h2>
+                            <h2 style="font-size: 25px; text-align:center;">YJYD</h2>
                             <div class="review-rating">
                                 <i class="fas fa-star">
                                 </i>
@@ -626,9 +628,23 @@
                 }
             }
 
+            let wishlistCount = 0; // Initialize the count
+
             function toggleWishlist(icon) {
+                // Toggle the heart color
                 icon.style.color = icon.style.color === 'red' ? '#ffffff' : 'red';
+
+                // Update the wishlist count based on the heart color
+                if (icon.style.color === 'red') {
+                    wishlistCount += 1; // Increase count when added to wishlist
+                } else {
+                    wishlistCount -= 1; // Decrease count when removed from wishlist
+                }
+
+                // Update the count display
+                document.getElementById('wishlistCount').innerText = wishlistCount;
             }
+
     </script>
         
  </body>

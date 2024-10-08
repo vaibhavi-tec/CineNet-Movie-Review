@@ -4,6 +4,7 @@
     <title>CineNet - Change Password</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -362,6 +363,29 @@
         .create-button:hover {
             background-color: #c0392b;
         }
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pagination-controls button {
+            background-color: #091F46;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination-controls button:hover {
+            background-color: #7699AE;
+        }
 
         .edit-popup {
             display: none;
@@ -479,29 +503,31 @@
                 <input type="text" placeholder="Search Movie Name from here">
             </div>
             <div class="nav-links">
-                <a href="{% url 'movies' %}">Movies</a>
-                <a href="{% url 'about' %}">About Us</a>
-                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+                <a href="/adminsite/movies">Movies</a>
+                <a href="/adminsite/about">About Us</a>
+                <a href="/adminsite/contact" class="contact">Contact Us</a>
             </div>
             <div class="nav-icons">
                 <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                    <span class="notification">3</span>
-                </i></a>
+                <a href="/adminsite/dashboard">
+                    <i class="fas fa-heart">
+                        <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                    </i>
+                </a>
             </div>
         </div>
         <div class="main">
             <div class="sidebar">
-                <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/adminsite/dashboard"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
                 <a href="{% url 'add' %}"><i class="fas fa-plus"></i> Add Movie</a>
-                <a href="{% url 'categories' %}"  class="active"><i class="fas fa-list"></i> Categories</a>
+                <a href="{% url 'categories' %}" class="active"><i class="fas fa-list"></i> Categories</a>
                 <a href="{% url 'language' %}"><i class="fa-solid fa-language"></i>Language</a>
-                <a href="{% url 'review' %}"><i class="fas fa-star"></i>Reviews</a>
+                <a href="{% url 'review' %}" ><i class="fas fa-star"></i>Reviews</a>
                 <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
-                <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
-                <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
-                <a href="{% url 'password' %}" ><i class="fas fa-key"></i> Change Password</a>
+                <a href="/adminsite/updateprofile"><i class="fas fa-user-edit"></i> Update Profile</a>
+                <a href="/adminsite/fav"><i class="fas fa-heart"></i> Favorites Movies</a>
+                <a href="/adminsite/password" ><i class="fas fa-key"></i> Change Password</a>
                 
             </div>
             <div class="content">
@@ -535,134 +561,26 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for category in category %}
                             <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Romantic</td>
+                                <td>{{ category.cid }}</td>
+                                <td>{{ category.date }}</td>
+                                <td>{{ category.title }}</td>
                                 <td class="actions">
                                     <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    <button class="delete" onclick="deleteRow('{{ category.cid }}')"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Action</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Horror</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Comedy</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Adventure</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Sports</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Fantasy</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Musicals</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Drama</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Thriller</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Western</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Historical</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Science</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2975TB</td>
-                                <td>12, Jan 2023</td>
-                                <td>Mystery</td>
-                                <td class="actions">
-                                    <button class="edit" onclick="editRow(this)">Edit</button>
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        <span>Showing 1 to {{ category|length }} of {{ category|length }} entries</span>
+                        <div class="pagination-controls">
+                            <button class="previous">Previous</button>
+                            <button class="next">Next</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="edit-popup" id="editPopup">
                     <div class="popup-content">
@@ -678,18 +596,17 @@
                     </div>
                 </div>
                 <div class="edit-popup" id="createPopup" style="display: none;">
-                    <div class="popup-content">
-                        <h2>Create Category</h2>
-                        <label for="createID">ID</label>
-                        <input type="text" id="createID">
-                        <label for="createDate">Date</label>
-                        <input type="date" id="createDate">
-                        <label for="createTitle">Title:</label>
-                        <input type="text" id="createTitle">
-                        <button class="btn green" onclick="saveCreate()">Create</button>
-                        <button class="btn red" onclick="closeCreatePopup()">Cancel</button>
-                    </div>
+                    
+                        <form id="createCategoryForm"  class="popup-content" enctype="multipart/form-data">
+                            <h2>Create Category</h2>
+                            <label for="title">Title:</label>
+                            <input type="text" id="title" required>
+                            <button type="submit" class="btn green">Create</button>
+                            <button type="button" class="btn red" onclick="closeCreatePopup()">Cancel</button>
+                        </form>
+                    
                 </div>
+                
                 
             </div>
         </div>
@@ -724,6 +641,37 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('createCategoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const title = document.getElementById('title').value;
+            
+    
+            // Log data for debugging
+            console.log('Form submitted', {
+                title
+            });
+    
+            // FormData object
+            const formData = new FormData();
+            formData.append('title', title);
+    
+            // AJAX request
+            $.ajax({
+                type: "POST",
+                url: "{% url 'add_categories' %}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert('categories added successfully!');
+                    window.location.href = "/adminsite/categories";
+                }
+            });
+        });
+    </script>
+    
     <script src="{% static '/js/categories.js' %}"></script>
 </body>
 </html>

@@ -1,65 +1,27 @@
 let currentRow;
 
-function editRow(button) {
-    // Get the row to edit
-    const row = button.parentNode.parentNode;
-    currentRow = row;
-
-    // Populate the edit form with the row data
-    document.getElementById('editName').value = row.cells[1].innerText.trim();
-    document.getElementById('editEmail').value = row.cells[2].innerText;
-    document.getElementById('editRole').value = row.cells[3].innerText;
-
-    // Show the popup
-    document.getElementById('editPopup').style.display = 'block';
-}
-
-function saveEdit() 
-{
-        // Update the row with the edited data
-        var username  = document.getElementById('editName').value;
-        var password = document.getElementById('editEmail').value;
-        var role = document.getElementById('editRole').value;
-        // var appointmentid = document.getElementById('editCondition').value;
-    // console.log("id: ",id);
-        $.ajax({
-            type: "POST",
-            url: "/api/edit_user/",
-            data: {"username": username, "password": password,"role" : role },
-            success: function(e)
-            {
-                window.location.replace("/adminsite/userview");
-            }
-
-        });
-        if (!currentRow) return; // Prevent saving if no row is selected
-
-
-    // Close the popup
-    closeEditPopup();
-}
 
 function closeEditPopup() {
     document.getElementById('editPopup').style.display = 'none';
 }
 
-function deleteRow(button) 
+function deleteRow(username) 
 {
-    //console.log("username: ",username);
-    //$.ajax({
-    //    type: "POST",
-    //    url: "/api/delete_user/",
-    //    data: {"username": username},
-    //    success: function(d)
-    //    {
-    //        window.location.replace("/adminsite/use");
-    //    }
+    console.log("username: ",username);
+    $.ajax({
+        type: "POST",
+        url: "/adminsite/api/delete_user/",
+        data: {"username": username},
+        success: function(d)
+        {
+            window.location.replace("/adminsite/userview");
+        }
 
-    //});
+    });
 
     //Remove the row from the table
-    const row = button.parentNode.parentNode;
-    row.parentNode.removeChild(row);
+    // const row = button.parentNode.parentNode;
+    // row.parentNode.removeChild(row);
 }
 
 document.getElementById('filterBtn').addEventListener('click', function() {
@@ -106,3 +68,35 @@ function sortTable(column, order) {
     // Re-append sorted rows to the table body
     rows.forEach(row => tbody.appendChild(row));
 }
+
+function openCreatePopup() {
+    document.getElementById('createPopup').style.display = 'block';
+}
+
+function saveCreate() {
+    const table = document.getElementById('UserviewTable').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+    
+    newRow.insertCell(0).innerText  = document.getElementById('email').value;
+    newRow.insertCell(1).innerText = document.getElementById('username').value;
+    newRow.insertCell(2).innerText  = document.getElementById('password').value;
+    newRow.insertCell(3).innerText  = document.getElementById('role').value;
+    newRow.insertCell(4).innerText  = document.getElementById('profile').files[0]; // Get the selected file
+    
+    const actionsCell = newRow.insertCell(3);
+    actionsCell.innerHTML = `
+
+        <div class="actions">
+            <button class="edit" onclick="editRow(this)">Edit</button>
+            <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+        </div>
+    `;
+    
+    closeCreatePopup();
+}
+
+function closeCreatePopup() {
+    document.getElementById('createPopup').style.display = 'none';
+}
+
+

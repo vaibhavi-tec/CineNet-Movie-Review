@@ -78,7 +78,7 @@ body {
     border-radius: 15px;
 }
 .w-full {
-    width: 100%;
+    width: 70%;
 }
 .h-96 {
     height: 25rem;
@@ -144,7 +144,7 @@ body {
     justify-content: flex-end;
 }
 .h-64 {
-    height: 16rem;
+    height: 20rem;
 }
 .object-cover {
     object-fit: cover;
@@ -265,6 +265,7 @@ body {
 
 .review-rating {
     color: #f5c518;
+    text-align:center;
 }
 .movie-wrapper {
     position: relative;

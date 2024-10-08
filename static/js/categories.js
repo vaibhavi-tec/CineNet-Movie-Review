@@ -1,5 +1,6 @@
 let currentRow;
 
+
 function editRow(button) {
     // Get the row to edit
     const row = button.closest('tr'); // Use closest to ensure it gets the row
@@ -75,9 +76,8 @@ function saveCreate() {
     const table = document.getElementById('CategoriesTable').getElementsByTagName('tbody')[0];
     const newRow = table.insertRow();
     
-    newRow.insertCell(0).innerText = document.getElementById('createID').value;
-    newRow.insertCell(1).innerText = new Date(document.getElementById('createDate').value).toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
-    newRow.insertCell(2).innerText = document.getElementById('createTitle').value;
+    newRow.insertCell(0).innerText  = document.getElementById('title').value;
+    
     
     const actionsCell = newRow.insertCell(3);
     actionsCell.innerHTML = `
@@ -90,6 +90,8 @@ function saveCreate() {
     
     closeCreatePopup();
 }
+
+
 
 function closeCreatePopup() {
     document.getElementById('createPopup').style.display = 'none';

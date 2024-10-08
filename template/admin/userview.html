@@ -4,6 +4,7 @@
     <title>CinemaNet Profile</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -107,6 +108,7 @@
             border: 1px solid #333;
             padding: 20px;
             border-radius: 15px;
+            
         }
         .sidebar a {
             display: block;
@@ -134,6 +136,7 @@
             padding: 20px;
             --tw-bg-opacity: 1;
             background-color: rgb(8 10 26 / var(--tw-bg-opacity));
+            margin-left: 20px;
         }
         
         .content h2 {
@@ -211,18 +214,7 @@
         .filter-options button:hover {
             background-color: #7699AE;
         }
-        .table-container {
-            --tw-bg-opacity: 1;
-            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
-            border-radius: 10px;
-            border: 1px solid #333;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            border: 1px solid #333;
-        }
+        
         th, td {
             padding: 10px;
             text-align: left;
@@ -256,12 +248,33 @@
         .table-container .actions button:hover {
             background-color: #30363d;
         }
+        .table-scroll {
+            max-width: 1070px; /* Adjust height as needed */
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
        
         img {
             border-radius: 50%;
             width: 40px;
             height: 40px;
         }
+        .table-container {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            border-radius: 10px;
+            border: 1px solid #333;
+            padding: 20px;
+            width: 1150px; /* Set to fit the content */
+            margin: 0 auto; /* Center the table */
+        }
+    
+        table {
+            width: 100%; /* Adjust width as needed */
+            border-collapse: collapse;
+            border: 1px solid #333;
+            margin: 0 auto; /* Center the table */
+        }
+        
         .pagination {
             display: flex;
             justify-content: space-between;
@@ -284,6 +297,83 @@
 
         .pagination-controls button:hover {
             background-color: #7699AE;
+        }
+        .create-button {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+        .create-button:hover {
+            background-color: #c0392b;
+        }
+
+        .edit-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #161b22;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #333;
+            border-radius: 5px;
+            z-index: 1000;
+            padding: 20px;
+            width: 400px;
+        }
+
+        .edit-popup .popup-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .edit-popup .popup-content h2 {
+            margin-bottom: 20px;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .popup-content label {
+            margin-bottom: 5px;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .popup-content input {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #333;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        .edit-popup .btn {
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .edit-popup .btn.green {
+            background-color: #091F46;
+            color: white;
+        }
+
+        .edit-popup .btn.green:hover {
+            background-color: #7699AE;
+        }
+
+        .edit-popup .btn.red {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .edit-popup .btn.red:hover {
+            background-color: #c82333;
         }
         .footer {
             --tw-bg-opacity: 1;
@@ -336,29 +426,32 @@
                 <input type="text" placeholder="Search Movie Name from here">
             </div>
             <div class="nav-links">
-                <a href="{% url 'movies' %}">Movies</a>
-                <a href="{% url 'about' %}">About Us</a>
-                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+                <a href="/adminsite/movies">Movies</a>
+                <a href="/adminsite/about">About Us</a>
+                <a href="/adminsite/contact" class="contact">Contact Us</a>
             </div>
             <div class="nav-icons">
                 <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
-                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
-                    <span class="notification">3</span>
-                </i></a>
+                <a href="/adminsite/dashboard">
+                    <i class="fas fa-heart">
+                        <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                    </i>
+                </a>
             </div>
         </div>
         <div class="main">
             <div class="sidebar">
-                <a href="{% url 'dashboard' %}"  ><i class="fas fa-home"></i> Dashboard</a>
+                <a href="/adminsite/dashboard"><i class="fas fa-home"></i> Dashboard</a>
                 <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
                 <a href="{% url 'add' %}"><i class="fas fa-plus"></i> Add Movie</a>
                 <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
                 <a href="{% url 'language' %}"><i class="fa-solid fa-language"></i>Language</a>
-                <a href="{% url 'review' %}"><i class="fas fa-star"></i>Reviews</a>
-                <a href="{% url 'userview' %}" class="active"><i class="fas fa-users"></i> Users</a>
-                <a href="{% url 'updateprofile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
-                <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
-                <a href="{% url 'password' %}" ><i class="fas fa-key"></i> Change Password</a>
+                <a href="{% url 'review' %}" ><i class="fas fa-star"></i>Reviews</a>
+                <a href="{% url 'userview' %}"   class="active"><i class="fas fa-users"></i> Users</a>
+                <a href="/adminsite/updateprofile"><i class="fas fa-user-edit"></i> Update Profile</a>
+                <a href="/adminsite/fav"><i class="fas fa-heart"></i> Favorites Movies</a>
+                <a href="/adminsite/password" ><i class="fas fa-key"></i> Change Password</a>
+                
             </div>
             <div class="content">
                 <h2>Users</h2>
@@ -378,111 +471,83 @@
                         </div>
                     </div>
                 </div>
+                <button class="create-button" onclick="openCreatePopup()"><i class="fas fa-plus"></i> Create</button>
                 <div class="table-container">
                     <table id="UserviewTable">
                         <thead>
                             <tr>
                                 <th>IMAGE</th>
-                                <th>ID</th>
-                                <th>DATE</th>
-                                <th>FULL NAME</th>
+                                <th>UID</th>
+                                <th>USERNAME</th>
                                 <th>EMAIL</th>
+                                <th>Password</th>
+                                <th>ROLE</th>
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><img alt="Profile image of Tom Cruise" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-YimIaDvEUhbusd6RX36HRTOd.png?st=2024-09-12T05%3A01%3A48Z&amp;se=2024-09-12T07%3A01%3A48Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A23%3A51Z&amp;ske=2024-09-12T23%3A23%3A51Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=1ed/s73F6W4PH8VsVWlA05g0JEqkKctMenQe8pOosAw%3D" width="40"/></td>
-                                <td>2R75T8</td>
-                                <td>12, Jan 2023</td>
-                                <td>Tom Cruise</td>
-                                <td>tomcruise@gmail.com</td>
-                                <td class="actions">
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><img alt="Profile image of Emily Blunt" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-wH64k5fF3ZFewVkB8L0n83xm.png?st=2024-09-12T05%3A01%3A48Z&amp;se=2024-09-12T07%3A01%3A48Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A18%3A09Z&amp;ske=2024-09-12T23%3A18%3A09Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=9oWG6Hz2r/rKr71SlqtDy59u8r5j5FYqkZpBn8ApTtg%3D" width="40"/>
-                                </td>
-                                <td>2R75T8</td>
-                                <td>12, Jan 2023</td>
-                                <td>Emily Blunt</td>
-                                <td>emilyblunt@gmail.com</td>
-                                <td class="actions">
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
+                            {% for user in users %}
                             <tr>
                                 <td>
-                                <img alt="Profile image of John Snow" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-Q208V2VwgCsnVBDC2Yq5yApU.png?st=2024-09-12T05%3A01%3A46Z&amp;se=2024-09-12T07%3A01%3A46Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T19%3A57%3A19Z&amp;ske=2024-09-12T19%3A57%3A19Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=kcemZJ3zq74xn/S6OBxSF/vMjH0S7BXWPfaT8SE4Pcw%3D" width="40"/>
+                                    {% if user.image %}
+                                        <img alt="Profile image of {{ user.username }}" height="40" src="{{ user.image.url }}" width="40"/>
+                                    {% else %}
+                                        <img alt="Default image" height="40" src="{% static 'images/user/image.png' %}" width="40"/> <!-- Default image if none -->
+                                    {% endif %}
                                 </td>
-                                <td>
-                                2R75T8
-                                </td>
-                                <td>
-                                12, Jan 2023
-                                </td>
-                                <td>
-                                John Snow
-                                </td>
-                                <td>
-                                johnsnow@gmail.com
-                                </td>
+                                <td>{{ user.uid }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.password }}</td>
+                                <td>{{ user.role }}</td>
                                 <td class="actions">
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
+                                    <button class="delete" onclick="deleteRow('{{ user.username }}')"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                <img alt="Profile image of Will Smith" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-E6QU9Y7JshqiLp0pA5TG7ihy.png?st=2024-09-12T05%3A01%3A45Z&amp;se=2024-09-12T07%3A01%3A45Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-12T05%3A22%3A28Z&amp;ske=2024-09-13T05%3A22%3A28Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=BvbvY2FNWE%2B635vpL%2BqyeWjX1raLfFWXe9pThbQMk6E%3D" width="40"/>
-                                </td>
-                                <td>
-                                2R75T8
-                                </td>
-                                <td>
-                                12, Jan 2023
-                                </td>
-                                <td>
-                                Will Smith
-                                </td>
-                                <td>
-                                willsmith@gmail.com
-                                </td>
-                                <td class="actions">
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                <img alt="Profile image of Minah Lee" height="40" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-LmQ09WWGIGwOeeA4ArnRw0x5/user-uJPET5fjNenSso8wCETWVNOp/img-zlLkaRJL4Lko1DFvtmGWNLrm.png?st=2024-09-12T05%3A01%3A51Z&amp;se=2024-09-12T07%3A01%3A51Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-11T23%3A25%3A49Z&amp;ske=2024-09-12T23%3A25%3A49Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=i8ZSf5PXPaWAuxTT/S7SNPMpxILJjhb5KgVz7F7huKI%3D" width="40"/>
-                                </td>
-                                <td>
-                                2R75T8
-                                </td>
-                                <td>
-                                12, Jan 2023
-                                </td>
-                                <td>
-                                Minah Lee
-                                </td>
-                                <td>
-                                minahlee@gmail.com
-                                </td>
-                                <td class="actions">
-                                    <button class="delete" onclick="deleteRow(this)"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                    </tbody>
-                 </table>
-                </div>
-                <div class="pagination">
-                    <span>Showing 1 to {{ userdata|length }} of {{ userdata|length }} entries</span>
-                    <div class="pagination-controls">
-                        <button class="previous">Previous</button>
-                        <button class="next">Next</button>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                
+                    <div class="pagination">
+                        <span>Showing 1 to {{ users|length }} of {{ users|length }} entries</span>
+                        <div class="pagination-controls">
+                            <button class="previous">Previous</button>
+                            <button class="next">Next</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>    
+        </div>
+        <div class="edit-popup" id="createPopup" style="display: none;">
+            <form class="popup-content" id="signupform" enctype="multipart/form-data">
+                <h2>Create User</h2>
+            
+                <label class="username">Profile Image:</label>
+                <div class="image-upload" onclick="document.getElementById('profile').click();">
+                    <i class="fas fa-upload"></i>
+                    <p>Upload Profile</p>
+                    <p>(only .jpg and .png files will be accepted)</p>
+                    <input id="profile" type="file" accept="image/*" style="display:none;" required/>
+                </div>
+            
+                <label class="username">Username:</label>
+                <input type="text" placeholder="Username" id="username" required>
+            
+                <label class="email">Email:</label>
+                <input type="email" placeholder="Email" id="email" required>
+            
+                <label class="password">Password:</label>
+                <input type="password" placeholder="Password" id="password" required>
+            
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button class="btn green" onclick="saveCreate()">Create</button>
+                <button class="btn red" onclick="closeCreatePopup()">Cancel</button>
+            </form>
         </div>
         <div class="footer">
             <div class="footer-column">
@@ -516,48 +581,53 @@
         </div>
     </div>
     <script>
-        let currentRow;
-        function deleteRow(button) {
-            // Remove the row from the table
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        }
-        document.getElementById('filterBtn').addEventListener('click', function() {
-            const filterOptions = document.getElementById('filterOptions');
-            filterOptions.style.display = filterOptions.style.display === 'none' ? 'block' : 'none';
-        });
-
-        function sortTable(column, order) {
-            const table = document.getElementById('UserviewTable').getElementsByTagName('tbody')[0];
-            const rows = Array.from(table.rows);
-
-            rows.sort((a, b) => {
-                let valA = '';
-                let valB = '';
-
-                switch (column) {
-                    case 'name':
-                        valA = a.cells[1].innerText.trim().toLowerCase();
-                        valB = b.cells[1].innerText.trim().toLowerCase();
-                        break;
-                    case 'date':
-                        valA = new Date(a.cells[3].innerText);
-                        valB = new Date(b.cells[3].innerText);
-                        break;
-                }
-
-                if (order === 'asc') {
-                    return valA > valB ? 1 : -1;
-                } else {
-                    return valA < valB ? 1 : -1;
+        document.getElementById('signupform').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const profileImage = document.getElementById('profile').files[0];
+    
+            // Log data for debugging
+            console.log('Form submitted', {
+                email,
+                username,
+                password,
+                role,
+                profileImage
+            });
+    
+            // FormData object
+            const formData = new FormData();
+            formData.append('email', email);
+            formData.append('username', username);
+            formData.append('password', password);
+            formData.append('role', role);
+            if (profileImage) {
+                formData.append('profile', profileImage);
+            }
+    
+            // AJAX request
+            $.ajax({
+                type: "POST",
+                url: "{% url 'add_user' %}",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert('User added successfully!');
+                    window.location.href = "{% url 'userview' %}";
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', xhr.responseText);
+                    alert('An error occurred: ' + xhr.responseText);
                 }
             });
-
-            rows.forEach(row => table.appendChild(row));
-        }
-
-
-
+        });
     </script>
+    <script src="{% static '/js/userview.js' %}"></script>
+    
 </body>
 </html>
