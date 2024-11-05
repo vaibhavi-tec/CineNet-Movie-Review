@@ -1,0 +1,486 @@
+{% load static %}
+<html>
+<head>
+    <title>NETFlixo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+            color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color:  #282c34;
+        }
+        .navbar .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #374151;
+            border-radius: 5px;
+            padding: 5px 10px;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        .navbar .search-bar .fa-search {
+            color: #ffffff;
+            margin-right: 18px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        
+        .navbar .nav-icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .navbar .nav-icons .fa-user,
+        .navbar .nav-icons .fa-heart {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar .nav-icons .fa-user:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart .notification {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        .main {
+            display: flex;
+            padding: 20px;
+            background-color: #14161a;
+            flex: 1;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #1a1d23;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 0;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #2a2d33;
+            border-radius: 5px;
+        }
+        .sidebar a.active {
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .dashboard-header div {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            width: 30%;
+        }
+        .dashboard-header div i {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .recent-movies {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .recent-movies table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .recent-movies th, .recent-movies td {
+            padding: 10px;
+            text-align: left;
+        }
+        .recent-movies th {
+            background-color: #21262d;
+        }
+        .recent-movies tr:nth-child(even) {
+            background-color: #21262d;
+        }
+        .recent-movies tr:hover {
+            background-color: #30363d;
+        }
+        .recent-movies img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+        .actions i {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .actions i:hover {
+            color: #58a6ff;
+        }
+        .footer {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #0b0d1a;
+        }
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        .footer-column a {
+            text-decoration: none;
+            color: #8a8d9d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-contact h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e50914;
+        }
+        .footer-contact p {
+            margin: 0;
+            color: #8a8d9d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar">
+            <div class="logo">CinemaNet</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Movie Name from here">
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'movies' %}">Movies</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            </div>
+            <div class="nav-icons">
+                <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+                    <span class="notification">3</span>
+                </i></a>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="sidebar">
+            <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a>
+            <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
+            <a href="{% url 'add' %}" class="active"><i class="fas fa-plus"></i> Add Movie</a>
+            <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
+            <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
+            <a href="{% url 'update profile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
+            <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
+            <a href="{% url 'password' %}" ><i class="fas fa-key"></i> Change Password</a>
+            </div>
+        <div class="main-content">
+            <div class="dashboard-header">
+             <div>
+              <i class="fas fa-film">
+              </i>
+              <div>
+               Total Movies
+              </div>
+              <div>
+               90
+              </div>
+             </div>
+             <div>
+              <i class="fas fa-list">
+              </i>
+              <div>
+               Total Categories
+              </div>
+              <div>
+               8
+              </div>
+             </div>
+             <div>
+              <i class="fas fa-users">
+              </i>
+              <div>
+               Total Users
+              </div>
+              <div>
+               134
+              </div>
+             </div>
+            </div>
+            <div class="recent-movies">
+             <h2>
+              Recent Movies
+             </h2>
+             <table>
+              <thead>
+               <tr>
+                <th>
+                 IMAGE
+                </th>
+                <th>
+                 NAME
+                </th>
+                <th>
+                 CATEGORY
+                </th>
+                <th>
+                 LANGUAGE
+                </th>
+                <th>
+                 YEAR
+                </th>
+                <th>
+                 HOURS
+                </th>
+                <th>
+                 ACTIONS
+                </th>
+               </tr>
+              </thead>
+              <tbody>
+               <tr>
+                <td>
+                 <img alt="Army Of The Dead movie poster" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-Uj1Q16EgMVkXBsl7xCbEgqzb.png?st=2024-09-16T04%3A14%3A23Z&amp;se=2024-09-16T06%3A14%3A23Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A32%3A42Z&amp;ske=2024-09-16T23%3A32%3A42Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=kyMGqlNJt1Knuu1d67M6E7YZO837eXSBqKiSImjQ5Zc%3D" width="50"/>
+                </td>
+                <td>
+                 Army Of The Dead
+                </td>
+                <td>
+                 Western
+                </td>
+                <td>
+                 English
+                </td>
+                <td>
+                 2022
+                </td>
+                <td>
+                 3hr
+                </td>
+                <td class="actions">
+                 <i class="fas fa-edit">
+                 </i>
+                 <i class="fas fa-trash-alt">
+                 </i>
+                </td>
+               </tr>
+               <tr>
+                <td>
+                 <img alt="The Conjuring movie poster" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-0uiixMe4ynyzeRzCV9ky3BWw.png?st=2024-09-16T04%3A14%3A43Z&amp;se=2024-09-16T06%3A14%3A43Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-16T00%3A07%3A57Z&amp;ske=2024-09-17T00%3A07%3A57Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=HAq9vVVoE4%2BA7gDaPqi8tBIYi3JUS1eN7mwsN3GOLf8%3D" width="50"/>
+                </td>
+                <td>
+                 The Conjuring
+                </td>
+                <td>
+                 Thriller
+                </td>
+                <td>
+                 Chinese
+                </td>
+                <td>
+                 1999
+                </td>
+                <td>
+                 4hr
+                </td>
+                <td class="actions">
+                 <i class="fas fa-edit">
+                 </i>
+                 <i class="fas fa-trash-alt">
+                 </i>
+                </td>
+               </tr>
+               <tr>
+                <td>
+                 <img alt="My Favorite Person movie poster" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-nw2fAutiG7OkTKfOlqB3J2Q7.png?st=2024-09-16T04%3A14%3A28Z&amp;se=2024-09-16T06%3A14%3A28Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A59%3A07Z&amp;ske=2024-09-16T23%3A59%3A07Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=tmUUyEaUOzoYfLVJv1OZwb7cbIASZttxdh3MX1Ku2X0%3D" width="50"/>
+                </td>
+                <td>
+                 My Favorite Person
+                </td>
+                <td>
+                 Adventure
+                </td>
+                <td>
+                 Korean
+                </td>
+                <td>
+                 2000
+                </td>
+                <td>
+                 11hr
+                </td>
+                <td class="actions">
+                 <i class="fas fa-edit">
+                 </i>
+                 <i class="fas fa-trash-alt">
+                 </i>
+                </td>
+               </tr>
+               <tr>
+                <td>
+                 <img alt="Lets Be a crops movie poster" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-L4h1phoeFMNnaRLnySXuQQmN.png?st=2024-09-16T04%3A14%3A25Z&amp;se=2024-09-16T06%3A14%3A25Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A26%3A20Z&amp;ske=2024-09-16T23%3A26%3A20Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=1jhq3eVkIwqvrcR2uu1HmafiNHJBnXi/UCrzgFg1ufQ%3D" width="50"/>
+                </td>
+                <td>
+                 Lets Be a crops
+                </td>
+                <td>
+                 Musicals
+                </td>
+                <td>
+                 English
+                </td>
+                <td>
+                 2022
+                </td>
+                <td>
+                 5hr
+                </td>
+                <td class="actions">
+                 <i class="fas fa-edit">
+                 </i>
+                 <i class="fas fa-trash-alt">
+                 </i>
+                </td>
+               </tr>
+               <tr>
+                <td>
+                 <img alt="Below her mouth movie poster" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-SAOI37X9QClNb16ToBcnsb1U.png?st=2024-09-16T04%3A14%3A23Z&amp;se=2024-09-16T06%3A14%3A23Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A16%3A21Z&amp;ske=2024-09-16T23%3A16%3A21Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=AWelDpkQuLeuPgpqG03k%2BqeSE5a/3BB3QkXfcoq58mw%3D" width="50"/>
+                </td>
+                <td>
+                 Below her mouth
+                </td>
+                <td>
+                 Romantic
+                </td>
+                <td>
+                 English
+                </td>
+                <td>
+                 1899
+                </td>
+                <td>
+                 1hr
+                </td>
+                <td class="actions">
+                 <i class="fas fa-edit">
+                 </i>
+                 <i class="fas fa-trash-alt">
+                 </i>
+                </td>
+               </tr>
+              </tbody>
+             </table>
+            </div>
+        </div>
+    
+    </div>
+    <div class="footer">
+        <div class="footer-column">
+            <h3>Company</h3>
+            <a href="{% url'indexmain' %}">Home</a>
+            <a href="{% url'about' %}">About Us</a>
+            <a href="{% url'contact' %}">Contact Us</a>
+            <a href="{% url'movies' %}">Movies</a>
+        </div>
+        <div class="footer-column">
+            <h3>Top Categories</h3>
+            <a href="#">Action</a>
+            <a href="#">Romantic</a>
+            <a href="#">Drama</a>
+            <a href="#">Historical</a>
+        </div>
+        <div class="footer-column">
+            <h3>My Account</h3>
+            <a href="#">Dashboard</a>
+            <a href="#">My Favorites</a>
+            <a href="#">Profile</a>
+            <a href="#">Change Password</a>
+        </div>
+        <div class="footer-contact">
+            <h3>CinemaNet</h3>
+            <p>Lorem 196 Andrew Road, Suite 200,</p>
+            <p>New York, NY 10007</p>
+            <p>Tell: +255 754 661 423</p>
+            <p>Email: info@zpunet.com</p>
+        </div>
+    </div>
+</body>
+</html>

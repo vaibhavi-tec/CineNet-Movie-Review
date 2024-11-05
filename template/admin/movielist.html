@@ -1,0 +1,668 @@
+{% load static %}
+<html>
+<head>
+    <title>CineNet Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0b0b0d;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color:  #282c34;
+        }
+        .navbar .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #374151;
+            border-radius: 5px;
+            padding: 5px 10px;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        .navbar .search-bar .fa-search {
+            color: #ffffff;
+            margin-right: 18px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        
+        .navbar .nav-icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .navbar .nav-icons .fa-user,
+        .navbar .nav-icons .fa-heart {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar .nav-icons .fa-user:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart .notification {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .main {
+            display: flex;
+            padding: 20px;
+            background-color: #14161a;
+            flex: 1;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #1a1d23;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 0;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #2a2d33;
+            border-radius: 5px;
+        }
+        .sidebar a.active {
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 5px;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+        .content h1 {
+            color: #ffffff;
+        }
+        .table-container {
+            background-color: #161b22;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #21262d;
+            color: #c9d1d9;
+        }
+        td {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        .actions button {
+            background-color: #21262d;
+            border: none;
+            color: #c9d1d9;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .actions button:hover {
+            background-color: #30363d;
+        }
+        .delete-all {
+            background-color: #d73a49;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+        .delete-all:hover {
+            background-color: #e5534b;
+        }
+        .footer {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #0b0d1a;
+        }
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        .footer-column a {
+            text-decoration: none;
+            color: #8a8d9d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-contact h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e50914;
+        }
+        .footer-contact p {
+            margin: 0;
+            color: #8a8d9d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">CinemaNet</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Movie Name from here">
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'movies' %}">Movies</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            </div>
+            <div class="nav-icons">
+                <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+                    <span class="notification">3</span>
+                </i></a>
+            </div>
+        </div>
+        <div class="main">
+            <div class="sidebar">
+                <a href="{% url 'dashboard' %}"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="{% url 'movielist' %}"><i class="fas fa-film"></i> Movies List</a>
+                <a href="{% url 'add' %}" class="active"><i class="fas fa-plus"></i> Add Movie</a>
+                <a href="{% url 'categories' %}"><i class="fas fa-list"></i> Categories</a>
+                <a href="{% url 'userview' %}"><i class="fas fa-users"></i> Users</a>
+                <a href="{% url 'update profile' %}"><i class="fas fa-user-edit"></i> Update Profile</a>
+                <a href="{% url 'fav' %}"><i class="fas fa-heart"></i> Favorites Movies</a>
+                <a href="{% url 'password' %}" ><i class="fas fa-key"></i> Change Password</a>
+                </div>
+            <div class="content">
+                <h1>
+                 Movies List
+                </h1>
+                <button class="delete-all">
+                 Delete All
+                </button>
+                <div class="table-container">
+                 <table>
+                  <thead>
+                   <tr>
+                    <th>
+                     Image
+                    </th>
+                    <th>
+                     Name
+                    </th>
+                    <th>
+                     Category
+                    </th>
+                    <th>
+                     Language
+                    </th>
+                    <th>
+                     Year
+                    </th>
+                    <th>
+                     Hours
+                    </th>
+                    <th>
+                     Actions
+                    </th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Army Of The Dead" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-vGezeGVbv0nxiu1RJDEro9QP.png?st=2024-09-16T04%3A14%3A42Z&amp;se=2024-09-16T06%3A14%3A42Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-16T00%3A31%3A30Z&amp;ske=2024-09-17T00%3A31%3A30Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=c//dMgpknP7c4MJsHFE8htV8SmRCVhyX4KAqpMEj1Nc%3D" width="50"/>
+                    </td>
+                    <td>
+                     Army Of The Dead
+                    </td>
+                    <td>
+                     Western
+                    </td>
+                    <td>
+                     English
+                    </td>
+                    <td>
+                     2022
+                    </td>
+                    <td>
+                     3hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for The Conjuring" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-gRpaPuExsBdMFovxSVC7yqCr.png?st=2024-09-16T04%3A14%3A40Z&amp;se=2024-09-16T06%3A14%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A24%3A59Z&amp;ske=2024-09-16T23%3A24%3A59Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=G0dPZk7wiPXJaImEHjXU9GpzDP%2B9Kc8iPtd4uYERVLA%3D" width="50"/>
+                    </td>
+                    <td>
+                     The Conjuring
+                    </td>
+                    <td>
+                     Thriller
+                    </td>
+                    <td>
+                     Chinese
+                    </td>
+                    <td>
+                     1998
+                    </td>
+                    <td>
+                     4hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for My Favorite Person" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-vWiHeriXHnG61kZgdiZ3abBd.png?st=2024-09-16T04%3A14%3A41Z&amp;se=2024-09-16T06%3A14%3A41Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A22%3A21Z&amp;ske=2024-09-16T23%3A22%3A21Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=eNSWT/5FCa1KztjH0NCqh9CFTLYtTZEGt3TX3prhEGs%3D" width="50"/>
+                    </td>
+                    <td>
+                     My Favorite Person
+                    </td>
+                    <td>
+                     Adventure
+                    </td>
+                    <td>
+                     Korean
+                    </td>
+                    <td>
+                     2000
+                    </td>
+                    <td>
+                     1hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Lets Be a crops" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-IzQZTsJfoaxfybREMdtrC3dE.png?st=2024-09-16T04%3A14%3A42Z&amp;se=2024-09-16T06%3A14%3A42Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A49%3A41Z&amp;ske=2024-09-16T23%3A49%3A41Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=WN45crVCgW%2BqvpfkjhmK1vMa%2BXsBAuK437iM1Z8AyTM%3D" width="50"/>
+                    </td>
+                    <td>
+                     Lets Be a crops
+                    </td>
+                    <td>
+                     Musicals
+                    </td>
+                    <td>
+                     English
+                    </td>
+                    <td>
+                     2022
+                    </td>
+                    <td>
+                     3hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Below her mouth" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-7nfSzFGQ4Pb6pl7DlnUqeyuq.png?st=2024-09-16T04%3A14%3A48Z&amp;se=2024-09-16T06%3A14%3A48Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-16T00%3A00%3A21Z&amp;ske=2024-09-17T00%3A00%3A21Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=T1nBX0jt9Itc7KSjbi6MJgoto6kopkdLL6jwnEfTMds%3D" width="50"/>
+                    </td>
+                    <td>
+                     Below her mouth
+                    </td>
+                    <td>
+                     Romantic
+                    </td>
+                    <td>
+                     English
+                    </td>
+                    <td>
+                     1989
+                    </td>
+                    <td>
+                     1hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Legend of the seeker" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-3pPkweUfEduBSihUB03Dwfw1.png?st=2024-09-16T04%3A14%3A39Z&amp;se=2024-09-16T06%3A14%3A39Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A09%3A08Z&amp;ske=2024-09-16T23%3A09%3A08Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=2x7dv4E6Ce70iMBcbASVir8r7s%2BRQss4ZUXT3UkPiWU%3D" width="50"/>
+                    </td>
+                    <td>
+                     Legend of the seeker
+                    </td>
+                    <td>
+                     Horror
+                    </td>
+                    <td>
+                     Swahili
+                    </td>
+                    <td>
+                     2012
+                    </td>
+                    <td>
+                     19hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Scarlet Heart" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-4QrxEZqGq24a0A8O6BVKj0v3.png?st=2024-09-16T04%3A14%3A42Z&amp;se=2024-09-16T06%3A14%3A42Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A18%3A57Z&amp;ske=2024-09-16T23%3A18%3A57Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=iMDMKLz91fmckLvVRNOBqa87nWeAzueEphKcIFRY278%3D" width="50"/>
+                    </td>
+                    <td>
+                     Scarlet Heart
+                    </td>
+                    <td>
+                     Fantasy
+                    </td>
+                    <td>
+                     Korean
+                    </td>
+                    <td>
+                     2005
+                    </td>
+                    <td>
+                     4hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for The Last Dance" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-zNT4zFAMsU52n9iJS0BTDaVp.png?st=2024-09-16T04%3A14%3A40Z&amp;se=2024-09-16T06%3A14%3A40Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A58%3A23Z&amp;ske=2024-09-16T23%3A58%3A23Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=paqocoLLP/nA5m2vj%2BQPFVxqZ00caDw0p9Sl%2BRe3IaM%3D" width="50"/>
+                    </td>
+                    <td>
+                     The Last Dance
+                    </td>
+                    <td>
+                     Sports
+                    </td>
+                    <td>
+                     Japanese
+                    </td>
+                    <td>
+                     1998
+                    </td>
+                    <td>
+                     6hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Titanic" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-HRQqE0NRoXk0rTyPdX0jr1Er.png?st=2024-09-16T04%3A14%3A41Z&amp;se=2024-09-16T06%3A14%3A41Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A54%3A07Z&amp;ske=2024-09-16T23%3A54%3A07Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=AkrHLWHHjf2GhqDThga1tJG7cvVocj7ZBNVpb%2BniJL0%3D" width="50"/>
+                    </td>
+                    <td>
+                     Titanic
+                    </td>
+                    <td>
+                     Drama
+                    </td>
+                    <td>
+                     Swahili
+                    </td>
+                    <td>
+                     2002
+                    </td>
+                    <td>
+                     4hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for About Time of the Dead" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-f0OcTBvOZD4xaGzPpxh9mEL4.png?st=2024-09-16T04%3A15%3A03Z&amp;se=2024-09-16T06%3A15%3A03Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A43%3A12Z&amp;ske=2024-09-16T23%3A43%3A12Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=TF/Rh6om1cZFRcZpT3Ksqt8jG0NniE%2BKThLNUDpVk2Q%3D" width="50"/>
+                    </td>
+                    <td>
+                     About Time of the Dead
+                    </td>
+                    <td>
+                     Comedy
+                    </td>
+                    <td>
+                     French
+                    </td>
+                    <td>
+                     2000
+                    </td>
+                    <td>
+                     1hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                   <tr>
+                    <td>
+                     <img alt="Movie poster for Game of Thrones" height="50" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-Hh5RPsKhtBPsWCFSiEKnUJ6x/user-8qgiVpCV0U0b7zDjfFInHgjl/img-nB9TNms8AyVGV9BkvcnUl8SH.png?st=2024-09-16T04%3A14%3A41Z&amp;se=2024-09-16T06%3A14%3A41Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-15T23%3A40%3A47Z&amp;ske=2024-09-16T23%3A40%3A47Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=f3QHeNwZ4k1QQRFsDNTJekDv6JAnOW/CDU/Uc/qWMWI%3D" width="50"/>
+                    </td>
+                    <td>
+                     Game of Thrones
+                    </td>
+                    <td>
+                     Action
+                    </td>
+                    <td>
+                     Chinese
+                    </td>
+                    <td>
+                     2012
+                    </td>
+                    <td>
+                     9hr
+                    </td>
+                    <td class="actions">
+                     <button>
+                      Edit
+                     </button>
+                     <button style="background-color: #28a745;">
+                      ✔
+                     </button>
+                     <button style="background-color: #d73a49;">
+                      ✖
+                     </button>
+                    </td>
+                   </tr>
+                  </tbody>
+                 </table>
+                </div>
+               </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <a href="{% url'indexmain' %}">Home</a>
+                <a href="{% url'about' %}">About Us</a>
+                <a href="{% url'contact' %}">Contact Us</a>
+                <a href="{% url'movies' %}">Movies</a>
+            </div>
+            <div class="footer-column">
+                <h3>Top Categories</h3>
+                <a href="#">Action</a>
+                <a href="#">Romantic</a>
+                <a href="#">Drama</a>
+                <a href="#">Historical</a>
+            </div>
+            <div class="footer-column">
+                <h3>My Account</h3>
+                <a href="#">Dashboard</a>
+                <a href="#">My Favorites</a>
+                <a href="#">Profile</a>
+                <a href="#">Change Password</a>
+            </div>
+            <div class="footer-contact">
+                <h3>CinemaNet</h3>
+                <p>Lorem 196 Andrew Road, Suite 200,</p>
+                <p>New York, NY 10007</p>
+                <p>Tell: +255 754 661 423</p>
+                <p>Email: info@zpunet.com</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

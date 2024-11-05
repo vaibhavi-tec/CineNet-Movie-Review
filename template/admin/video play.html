@@ -1,0 +1,218 @@
+{% load static %}
+<html>
+ <head>
+  <title>
+   NETFLIXO
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0b0d1a;
+            color: #fff;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: #111;
+        }
+        .header .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .header .search-bar {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .header .search-bar input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        .header .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .header .nav-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .header .nav-links .icon {
+            position: relative;
+        }
+        .header .nav-links .icon .badge {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #fff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .main-content {
+            padding: 50px;
+            text-align: center;
+        }
+        .main-content .title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+        .main-content .video-container {
+            position: relative;
+            display: inline-block;
+        }
+        .main-content .video-container img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .main-content .video-container .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            padding: 20px;
+        }
+        .main-content .video-container .play-button i {
+            font-size: 24px;
+            color: #e50914;
+        }
+        .main-content .actions {
+            margin-top: 20px;
+        }
+        .main-content .actions .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .main-content .actions .btn.favorite {
+            background-color: #444;
+            color: #fff;
+            margin-right: 10px;
+        }
+        .main-content .actions .btn.download {
+            background-color: #e50914;
+            color: #fff;
+        }
+        .footer {
+            background-color: #111;
+            padding: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .footer .column {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .footer .column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .footer .column ul {
+            list-style: none;
+            padding: 0;
+        }
+        .footer .column ul li {
+            margin-bottom: 10px;
+        }
+        .footer .column ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .footer .column .contact-info {
+            font-size: 14px;
+        }
+  </style>
+ </head>
+ <body>
+    <div class="navbar">
+        <div class="logo">CinemaNet</div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Movie Name from here">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'movies' %}">Movies</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+        </div>
+        <div class="nav-icons">
+            <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+            <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+                <span class="notification">3</span>
+            </i></a>
+        </div>
+    </div>
+    <div class="main-content">
+    <div class="title">
+        My Favorite Person
+    </div>
+    <div class="video-container">
+        <img alt="Group of people standing with a dramatic background" height="400" src="https://oaidalleapiprodscus.blob.core.windows.net/private/org-RcpoXHkzChYnDbFAyeQ8tamr/user-ehrvabJ3DufsCu8YJ7PqY5gl/img-RK29pHOzfVmbx4tzA57SHaE1.png?st=2024-09-10T11%3A22%3A48Z&amp;se=2024-09-10T13%3A22%3A48Z&amp;sp=r&amp;sv=2024-08-04&amp;sr=b&amp;rscd=inline&amp;rsct=image/png&amp;skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&amp;sktid=a48cca56-e6da-484e-a814-9c849652bcb3&amp;skt=2024-09-09T23%3A19%3A40Z&amp;ske=2024-09-10T23%3A19%3A40Z&amp;sks=b&amp;skv=2024-08-04&amp;sig=VI7yGYQyc1XJRjfFGri6JTZueqFFxZv/H%2ByrqKu0Bbw%3D" width="800"/>
+        <div class="play-button">
+        <i class="fas fa-play">
+        </i>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="btn favorite">
+        <i class="fas fa-heart">
+        </i>
+        </button>
+        <button class="btn download">
+        <i class="fas fa-download">
+        </i>
+        Download
+        </button>
+    </div>
+    </div>
+    
+    <div class="footer">
+        <div class="footer-column">
+            <h3>Company</h3>
+            <a href="{% url'indexmain' %}">Home</a>
+            <a href="{% url'about' %}">About Us</a>
+            <a href="{% url'contact' %}">Contact Us</a>
+            <a href="{% url'movies' %}">Movies</a>
+        </div>
+        <div class="footer-column">
+            <h3>Top Categories</h3>
+            <a href="#">Action</a>
+            <a href="#">Romantic</a>
+            <a href="#">Drama</a>
+            <a href="#">Historical</a>
+        </div>
+        <div class="footer-column">
+            <h3>My Account</h3>
+            <a href="#">Dashboard</a>
+            <a href="#">My Favorites</a>
+            <a href="#">Profile</a>
+            <a href="#">Change Password</a>
+        </div>
+        <div class="footer-contact">
+            <h3>CinemaNet</h3>
+            <p>Lorem 196 Andrew Road, Suite 200,</p>
+            <p>New York, NY 10007</p>
+            <p>Tell: +255 754 661 423</p>
+            <p>Email: info@zpunet.com</p>
+        </div>
+    </div>
+
+  
+ </body>
+</html>
