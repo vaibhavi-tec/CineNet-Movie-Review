@@ -1,0 +1,551 @@
+{% load static %}
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Movie Page
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color:  #282c34;
+        }
+        .navbar .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #374151;
+            border-radius: 5px;
+            padding: 5px 10px;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        .navbar .search-bar .fa-search {
+            color: #ffffff;
+            margin-right: 18px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        
+        .navbar .nav-icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .navbar .nav-icons .fa-user,
+        .navbar .nav-icons .fa-heart {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar .nav-icons .fa-user:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart .notification {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        .main-content .poster {
+            flex: 1;
+        }
+        .main-content .poster img {
+            width: 80%;
+            border-radius: 15px;
+        }
+        .main-content .details {
+            flex: 2;
+            margin-left: 20px;
+        }
+        .main-content .details h1 {
+            font-size: 36px;
+            color: #fff;
+        }
+        .main-content .details .tags {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .main-content .details .tags span {
+            background-color: #e63946;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .main-content .details p {
+            margin: 20px 0;
+        }
+        .main-content .details .actions {
+            display: flex;
+            align-items: center;
+        }
+        .main-content .details .actions button {
+            background-color: #e63946;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        .main-content .details .actions button:first-child {
+            background-color: #1f2833;
+        }
+        .section {
+            margin-top: 40px;
+        }
+        .section h2 {
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+        .casts, .reviews  {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .related-movies{
+            margin-right: 20px;
+            width: 300px;
+            padding-left: 70px;
+            padding-right: 80px;
+        }
+        .related-movies .movie img {
+            width: 100%;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .casts .cast {
+            flex: 1;
+            margin: 10px;
+            text-align: center;
+        }
+        .related-movies .movie {
+            flex: 1;
+            padding:10px;
+            margin: 20px;
+            text-align: center;
+            border: 1px solid #333;
+            background-color: #0b0d1a;
+            border-radius: 15px;
+        }
+        .casts .cast img{
+            width: 100%;
+            border-radius: 10px;
+        }
+        .casts .cast p, .related-movies .movie p {
+            margin-top: 10px;
+        }
+        .containerreview {
+            display: flex;
+            padding: 20px;
+            padding-left: 70px;
+            padding-right: 80px;
+        }
+        .review-form, .reviews {
+            background-color: #131a2a;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .review-form {
+            flex: 1;
+            margin-right: 20px;
+        }
+        .reviews {
+            flex: 2;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 14px;
+            color: #b0b3b8;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #0b1121;
+            color: #ffffff;
+        }
+        .stars {
+            color: #f5c518;
+            margin: 10px 0;
+        }
+        .submit-btn {
+            background-color: #ff0000;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .review-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            padding: 30px 120px;
+            border-bottom: 1px solid #444;
+            background-color: #0b0d1a;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .review-item img {
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .review-content {
+            flex: 1;
+        }
+        .review-content h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .review-content p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .review-rating {
+            color: #f5c518;
+        }
+        .related-movies .movie {
+            position: relative;
+            margin: 10px;
+            text-align: center;
+        }
+        .wishlist-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+        #review-list {
+            
+            max-height: 300px; /* Adjust height as needed */
+            overflow-y: auto;  /* Enable vertical scrolling */
+        }
+
+        .wishlist-btn {
+            background-color: #ff0000; /* Same as submit button */
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px; /* Space above the button */
+        }
+
+        .footer {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #0b0d1a;
+        }
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        .footer-column a {
+            text-decoration: none;
+            color: #8a8d9d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-contact h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e50914;
+        }
+        .footer-contact p {
+            margin: 0;
+            color: #8a8d9d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+  </style>
+ </head>
+ <body>
+        <div class="navbar">
+            <div class="logo">CinemaNet</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search Movie Name from here">
+            </div>
+            <div class="nav-links">
+                <a href="{% url 'movies' %}">Movies</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}" class="contact">Contact Us</a>
+            </div>
+            <div class="nav-icons">
+                <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+                <a href="{% url 'dashboard' %}"><i class="fas fa-heart">
+                    <span class="notification">3</span>
+                </i></a>
+            </div>
+        </div>
+        <div class="container main-content">
+            <div class="poster">
+                <img alt="Related movie poster" height="550" src="{% static movie.mimage.url %}" width="200"/>
+            </div>
+            <div class="details">
+                <h1>
+                    {{ movie.title }}
+                </h1>
+                <div class="tags">
+                    <span>HD 4K</span>
+                    <span>{{ movie.category }}</span>
+                    <span>{{ movie.year }}</span>
+                    <span>{{ movie.duration }}</span>
+                </div>
+                <p><strong>Description : </strong>{{ movie.description }}</p>
+                <p><strong>Director: </strong>{{ movie.director }}</p>
+                <p><strong> Writer: </strong>{{ movie.writer }}</p>
+                <p><strong>Stars: </strong>"{{ movie.stars }}"</p>
+                <div class="review-rating">
+                    {% for star in "★★★★★" %}
+                        {% if forloop.counter <= movie.reviews %}
+                            <i class="fas fa-star"></i>
+                        {% else %}
+                            <i class="far fa-star"></i>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="actions" style="margin-top: 20px;">
+                    <button>
+                        <i class="fas fa-language"></i>
+                        <strong>Language:</strong>{{ movie.language }}
+                    </button>
+                    <button>
+                        <i class="fas fa-play"></i>
+                        <a href="{% url 'videoplay' movie.mid %}">Watch</a> <!-- Pass movie ID to the URL -->
+                    </button>
+                </div>
+                
+                <button class="wishlist-btn" onclick="toggleWishlistButton()">Add to Wishlist</button>
+            </div>
+        </div>
+        <div class="container section">
+            <h2>Casts</h2>
+            <div class="casts">
+                {% for cast in cast_members %}
+                    <div class="cast">
+                        <img alt="{{ cast.cast }}" height="250" src="{% static cast.cimage.url %}" width="100"/>
+                        <p>{{ cast.cast }}</p>
+                    </div>
+                {% empty %}
+                    <p>{{ cast|length }}  cast members available.</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="containerreview">
+            <div class="review-form">
+                <h2>Review "The Conjuring"</h2>
+                <p>Write a review for this movie. It will be posted on this page.</p>
+                <label for="rating">Select Rating</label>
+                <select id="rating" onchange="updateStars()">
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                </select>
+                <div class="stars" id="stars">
+                    <i class="fas fa-star" data-value="2" onclick="setRating(2)"></i>
+                    <i class="fas fa-star" data-value="3" onclick="setRating(3)"></i>
+                    <i class="fas fa-star" data-value="4" onclick="setRating(4)"></i>
+                    <i class="fas fa-star" data-value="5" onclick="setRating(5)"></i>
+                    <i class="fas fa-star" data-value="6" onclick="setRating(6)"></i>
+                </div>
+                <label for="message">Message</label>
+                <textarea id="message" rows="4">Make it short and sweet....</textarea>
+                <button class="submit-btn" onclick="submitReview()">Submit</button>
+            </div>
+            <div class="reviews">
+                <h2>Reviews (56)</h2>
+                <div id="review-list" style="margin-top: 60px; max-height: 350px; overflow-y: auto;">
+                    <!-- Reviews will be appended here -->
+                </div>
+            </div>
+        </div>
+        <div class="related-movies">
+            <h2>Related Movies</h2>
+            <div class="movie" id="related-movie">
+                <img alt="Related movie poster" height="350" src="{% static 'images/banner.png' %}" width="300"/>
+                <h3>The Conjuring</h3>
+                <div class="review-rating">
+                    <i class="fas fa-star">
+                    </i>
+                    <i class="fas fa-star">
+                    </i>
+                    <i class="fas fa-star">
+                    </i>
+                    <i class="fas fa-star">
+                    </i>
+                    <i class="far fa-star">
+                    </i>
+                </div>
+                <i class="fas fa-heart wishlist-icon" onclick="toggleWishlist(this)"></i>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <a href="{% url 'indexmain' %}">Home</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                <a href="{% url 'movies' %}">Movies</a>
+            </div>
+            <div class="footer-column">
+                <h3>Top Categories</h3>
+                <a href="#">Action</a>
+                <a href="#">Romantic</a>
+                <a href="#">Drama</a>
+                <a href="#">Historical</a>
+            </div>
+            <div class="footer-column">
+                <h3>My Account</h3>
+                <a href="#">Dashboard</a>
+                <a href="#">My Favorites</a>
+                <a href="#">Profile</a>
+                <a href="#">Change Password</a>
+            </div>
+            <div class="footer-contact">
+                <h3>CinemaNet</h3>
+                <p>Lorem 196 Andrew Road, Suite 200,</p>
+                <p>New York, NY 10007</p>
+                <p>Tell: +255 754 661 423</p>
+                <p>Email: info@zpunet.com</p>
+            </div>
+        </div>
+
+        <script>
+            let currentStarRating = 0;
+    
+            function updateStars() {
+                const rating = document.getElementById('rating').value;
+                const stars = document.querySelectorAll('#stars .fa-star');
+                stars.forEach((star, index) => {
+                    star.style.color = index < rating ? '#f5c518' : '#b0b3b8';
+                });
+                currentStarRating = rating;
+            }
+    
+            function setRating(value) {
+                document.getElementById('rating').value = value;
+                updateStars();
+            }
+    
+            function submitReview() {
+                const message = document.getElementById('message').value;
+                const reviewList = document.getElementById('review-list');
+                const reviewItem = document.createElement('div');
+                reviewItem.className = 'review-item';
+
+                reviewItem.innerHTML = `
+                    <img alt="Profile picture" height="50" src="{% static '/images/banner.png' %}" width="50"/>
+                    <div class="review-content">
+                        <h3>Your Name</h3>
+                        <p>${message}</p>
+                    </div>
+                    <div class="review-rating">${'★'.repeat(currentStarRating)}${'☆'.repeat(5 - currentStarRating)}</div>
+                `;
+                reviewList.appendChild(reviewItem); // Ensure the review item is appended here
+                document.getElementById('message').value = 'Make it short and sweet....';
+                updateStars();
+            }
+
+    
+            function toggleWishlist(icon) {
+                icon.style.color = icon.style.color === 'red' ? '#ffffff' : 'red';
+            }
+    
+            function toggleWishlistButton() {
+                const button = document.querySelector('.wishlist-btn');
+                if (button.innerText === "Add to Wishlist") {
+                    button.innerText = "Remove from Wishlist";
+                    button.style.backgroundColor = "#c5c6c7"; // Change color on addition
+                } else {
+                    button.innerText = "Add to Wishlist";
+                    button.style.backgroundColor = "#ff0000"; // Reset color
+                }
+            }
+            
+        </script>
+ </body>
+</html>

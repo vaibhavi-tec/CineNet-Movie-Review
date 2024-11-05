@@ -1,0 +1,288 @@
+{% load static %}
+<html>
+<head>
+    <title>NETFlixo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+            color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color:  #282c34;
+        }
+        .navbar .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #374151;
+            border-radius: 5px;
+            padding: 5px 10px;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        .navbar .search-bar .fa-search {
+            color: #ffffff;
+            margin-right: 18px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        
+        .navbar .nav-icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .navbar .nav-icons .fa-user,
+        .navbar .nav-icons .fa-heart {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar .nav-icons .fa-user:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart:hover{
+            color: #e50914;
+        }
+        .nav-icons .user-icon {
+            width: 40px; /* Set the width */
+            height: 40px; /* Set the height */
+            border-radius: 50%; /* Make it circular */
+            object-fit: cover; /* Ensure the image covers the circle */
+            margin: 0 10px; /* Space between icons */
+        }
+        .navbar .nav-icons .fa-heart .notification {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 200px);
+        }
+        .login-box {
+            background-color: #1a1a2e;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-align: left;
+        }
+        .login-box h2 {
+            color: #ff0000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #0b0b16;
+            color: #ffffff;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #ff0000;
+            color: #ffffff;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .login-box .signup-link {
+            margin-top: 20px;
+            color: #ffffff;
+        }
+        .login-box .signup-link a {
+            color: #ff0000;
+            text-decoration: none;
+        }
+        .footer {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #0b0d1a;
+        }
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        .footer-column a {
+            text-decoration: none;
+            color: #8a8d9d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-contact h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e50914;
+        }
+        .footer-contact p {
+            margin: 0;
+            color: #8a8d9d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">CinemaNet</div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Movie Name from here">
+        </div>
+        <div class="nav-links">
+            <a href="{% url 'signin' %}">Movies</a>
+            <a href="{% url 'signin' %}">About Us</a>
+            <a href="{% url 'signin' %}" class="contact">Contact Us</a>
+        </div>
+        <div class="nav-icons">
+            <a href="{% url 'signin' %}">
+                <img src="{% static 'images/cast/ranbir.jpg' %}" alt="User" class="user-icon" />
+            </a>
+            <a href="{% url 'signin' %}"><i class="fas fa-heart">
+                <span class="notification">3</span>
+            </i></a>
+        </div>
+    </div>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>NETFlixo</h2>
+            <label class="username">Username</label>
+            <input type="text" placeholder="Username">
+            <label class="password">Password</label>
+            <input type="password" placeholder="Password">
+            <button><i class="fas fa-sign-in-alt"></i> Sign In</button>
+            <div class="signup-link">
+                Don't have an account? <a href="{% url 'signup' %}">Sign Up</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-column">
+            <h3>Company</h3>
+            <a href="{% url 'indexmain' %}">Home</a>
+            <a href="{% url 'about' %}">About Us</a>
+            <a href="{% url 'contact' %}">Contact Us</a>
+            <a href="{% url 'movies' %}">Movies</a>
+        </div>
+        <div class="footer-column">
+            <h3>Top Categories</h3>
+            <a href="#">Action</a>
+            <a href="#">Romantic</a>
+            <a href="#">Drama</a>
+            <a href="#">Historical</a>
+        </div>
+        <div class="footer-column">
+            <h3>My Account</h3>
+            <a href="#">Dashboard</a>
+            <a href="#">My Favorites</a>
+            <a href="#">Profile</a>
+            <a href="#">Change Password</a>
+        </div>
+        <div class="footer-contact">
+            <h3>CinemaNet</h3>
+            <p>Lorem 196 Andrew Road, Suite 200,</p>
+            <p>New York, NY 10007</p>
+            <p>Tell: +255 754 661 423</p>
+            <p>Email: info@zpunet.com</p>
+        </div>
+    </div>
+    <script>
+        function check()
+        {
+            var username = $("#username").val();
+            var pass = $("#password").val();
+            //console.log("username: ", username);
+            //console.log("password: ", pass);
+            $.ajax({
+                type: "POST",
+                url: "{% url 'login_check' %}",
+                data:{"patientname": username, "pateintpass": pass},
+                success: function(data)
+                {
+                    console.log(data);
+                     if(data["status"] == "pass")
+                    {
+                        console.log("user: ", data["user"]);
+                        console.log("role: ", data["role"]);
+                        if(data["role"] == 'Admin')
+                        {
+                            alert("loged into admindash");
+                            window.location.replace("/adminsite/indexmain")
+                        }
+                        else if(data["role"] == 'User')
+                        {
+                            alert("loged into User");
+                            window.location.replace("/User/indexmain")
+                        }
+                        else
+                        {
+                            alert("login failed");
+                        }
+                        
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

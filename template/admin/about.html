@@ -1,0 +1,305 @@
+{% load static %}
+<html>
+ <head>
+  <title>
+    CinemaNet - About Us
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            --tw-bg-opacity: 1;
+            background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+            color: #ffffff;
+        }
+        .navbar {
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background-color:  #282c34;
+        }
+        .navbar .logo {
+            color: #e50914;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        .navbar .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #374151;
+            border-radius: 5px;
+            padding: 5px 10px;
+            flex-grow: 1;
+            max-width: 500px;
+        }
+        .navbar .search-bar input {
+            border: none;
+            background: none;
+            outline: none;
+            padding: 5px;
+            flex-grow: 1;
+            font-size: 16px;
+        }
+        .navbar .search-bar .fa-search {
+            color: #ffffff;
+            margin-right: 18px;
+        }
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .navbar .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        
+        .navbar .nav-icons {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+        }
+        .navbar .nav-icons .fa-user,
+        .navbar .nav-icons .fa-heart {
+            color: #ffffff;
+            font-size: 20px;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .navbar .nav-icons .fa-user:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart:hover{
+            color: #e50914;
+        }
+
+        .navbar .nav-icons .fa-heart .notification {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: #e50914;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+        .banner {
+            position: relative;
+            text-align: center;
+            color: white;
+            border-radius: 0.5rem;
+            padding-top: 16px;
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+        .banner img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+        }
+        .banner .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .content {
+            display: flex;
+            padding: 50px;
+        }
+        .content .text-section {
+            flex: 2;
+            padding-right: 110px;
+        }
+        .content .text-section h1 {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .content .text-section p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+        .content .stats {
+            display: flex;
+            margin-top: 20px;
+        }
+        .content .stats .stat {
+            background-color: #1a1c29;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 10px;
+            flex: 1;
+            text-align: center;
+        }
+        .content .stats .stat h2 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .content .stats .stat p {
+            margin-top: 10px;
+            color: #b0b3c1;
+        }
+        .content .image-section {
+            flex: 1;
+            padding-left: 0%;
+            padding-right: 220px;
+        }
+        .content .image-section img {
+            width: 175%;
+            border-radius: 10px;
+        }
+        .footer {
+            --tw-bg-opacity: 1;
+            background-color: rgb(11 15 41 / var(--tw-bg-opacity));
+            --tw-border-opacity: 1;
+            border-color: rgb(75 85 99 / var(--tw-border-opacity));
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #0b0d1a;
+        }
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-column h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #ffffff;
+        }
+        .footer-column a {
+            text-decoration: none;
+            color: #8a8d9d;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .footer-column a:hover {
+            color: #ffffff;
+        }
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-contact h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #e50914;
+        }
+        .footer-contact p {
+            margin: 0;
+            color: #8a8d9d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+  </style>
+ </head>
+ <body>
+    <div class="navbar">
+        <div class="logo">CinemaNet</div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search Movie Name from here">
+        </div>
+        <div class="nav-links">
+            <a href="/adminsite/movies">Movies</a>
+            <a href="/adminsite/about">About Us</a>
+            <a href="/adminsite/contact" class="contact">Contact Us</a>
+        </div>
+        <div class="nav-icons">
+            <a href="{% url 'signin' %}"><i class="fas fa-user"></i></a>
+            <a href="/adminsite/dashboard">
+                <i class="fas fa-heart">
+                    <span class="notification" id="wishlistCount">0</span> <!-- Initial count set to 0 -->
+                </i>
+            </a>
+        </div>
+    </div>
+    <div class="banner">
+        <img alt="Banner image with various movie posters" height="400" src="{% static 'images/about1.png' %}" width="1200"/>
+        <div class="text">
+            About Us
+        </div>
+    </div>
+    <div class="content">
+    <div class="text-section">
+        <h1>
+            Welcome to our CinemaNet
+        </h1>
+        <p>
+            Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+        <p>
+            Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+        </p>
+        <div class="stats">
+            <div class="stat">
+                <h2>
+                    10K
+                </h2>
+                <p>
+                    Listed Movies
+                </p>
+                <p>
+                    Lorem ipsum is simply dummy text of the printing and
+                </p>
+            </div>
+            <div class="stat">
+                <h2>
+                8K
+                </h2>
+                <p>
+                Lovely Users
+                </p>
+                <p>
+                Completely free, without registration! Lorem Ipsum is simply
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="image-section">
+            <img alt="Image of three superheroes standing together" height="600" src="{% static 'images/about2.jpg' %}" width="1200"/>
+    </div>
+    </div>
+        <div class="footer">
+            <div class="footer-column">
+                <h3>Company</h3>
+                <a href="{% url 'indexmain' %}">Home</a>
+                <a href="{% url 'about' %}">About Us</a>
+                <a href="{% url 'contact' %}">Contact Us</a>
+                <a href="{% url 'movies' %}">Movies</a>
+            </div>
+            <div class="footer-column">
+                <h3>Top Categories</h3>
+                <a href="#">Action</a>
+                <a href="#">Romantic</a>
+                <a href="#">Drama</a>
+                <a href="#">Historical</a>
+            </div>
+            <div class="footer-column">
+                <h3>My Account</h3>
+                <a href="#">Dashboard</a>
+                <a href="#">My Favorites</a>
+                <a href="#">Profile</a>
+                <a href="#">Change Password</a>
+            </div>
+            <div class="footer-contact">
+                <h3>CinemaNet</h3>
+                <p>Lorem 196 Andrew Road, Suite 200,</p>
+                <p>New York, NY 10007</p>
+                <p>Tell: +255 754 661 423</p>
+                <p>Email: info@zpunet.com</p>
+            </div>
+        </div>
+    </div>
+ </body>
+</html>
